@@ -30,7 +30,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GlobalConfig", "GlobalConfi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AITestExe", "test\exe\AITestExe\AITestExe.csproj", "{23EB9A93-3616-420D-8AB5-EAFD5D1B386B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Extension.Core", "src\Common.Extension.Core\Common.Extension.Core.csproj", "{73E6AEE7-D6A1-431D-9C70-05B302EB559F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Extension.Core", "src\Common.Extension.Core\Common.Extension.Core.csproj", "{73E6AEE7-D6A1-431D-9C70-05B302EB559F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polytech.Common.Telemetron.Multi", "src\Polytech.Common.Telemetron.Multi\Polytech.Common.Telemetron.Multi.csproj", "{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +76,10 @@ Global
 		{73E6AEE7-D6A1-431D-9C70-05B302EB559F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73E6AEE7-D6A1-431D-9C70-05B302EB559F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73E6AEE7-D6A1-431D-9C70-05B302EB559F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

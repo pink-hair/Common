@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>Polytech.Common.Telemetron</RootNamespace>
+  </PropertyGroup>
+  <Import Project="..\..\common-prod.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Telemetron.Core\Common.Telemetron.Core.csproj" />
+  </ItemGroup>
+
+</Project>

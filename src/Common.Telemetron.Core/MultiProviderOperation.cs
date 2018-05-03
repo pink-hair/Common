@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Polytech.Common.Telemetron
 {
-    class MultiProviderOperation
+    public class MultiProviderOperation
     {
     }
 }

@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using Telemetron.Core;
+using Polytech.Common.Telemetron;
 
 namespace Telemetron.Console.Unit.Tests
 {

@@ -7,7 +7,16 @@
   
     <TargetFrameworks>$(CommonAllFrameworks)</TargetFrameworks>
     <TargetFrameworks Condition="'$(Configuration)' == 'Debug'">$(CommonDebugFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+  
+  <PropertyGroup Label="NuGet">
     <PackageVersion>1.2.3-replacable</PackageVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Copyright>Copyright © Poly Tech</Copyright>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://github.com/poly-tech/Common/blob/origin/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/poly-tech/Common</PackageProjectUrl>
+    <PackageTags>Logging</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup>

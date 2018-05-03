@@ -79,6 +79,12 @@
             }
         }
 
+        public static bool Filter(string message, Exception ex)
+        {
+            Instance.Trace(EventSeverity.Error, message, ex);
+            return false;
+        }
+
         private static string CreateTraceMessage(string message, Exception exception, string codePoint, Dictionary<string, string> data)
         {
             var combinedData = data.SafeCombine(exception);
