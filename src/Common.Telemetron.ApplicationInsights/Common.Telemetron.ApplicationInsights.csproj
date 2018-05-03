@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>Polytech.Common.Telemetron</RootNamespace>
+  </PropertyGroup>
+  <Import Project="..\..\common-prod.props" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.5.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Extension.Core\Common.Extension.Core.csproj" />
+    <ProjectReference Include="..\Common.Telemetron.Core\Common.Telemetron.Core.csproj" />
+  </ItemGroup>
+
+</Project>

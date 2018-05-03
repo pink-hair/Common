@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>Polytech.Common.Telemetron</RootNamespace>
+  </PropertyGroup>
+
+  <Import Project="..\..\common-prod.props" />
+
+  <PropertyGroup Label="Unsafe code is required to build a fixed buffer collection that is copied in the way that is required for AsyncLocal">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="newtonsoft.json" Version="11.0.2" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,88 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Telemetron.Core", "src\Common.Telemetron.Core\Common.Telemetron.Core.csproj", "{9F9E21A4-9B7D-4AEC-8FDB-A5FB34005F54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.WindowsService", "src\Common.WindowsService\Common.WindowsService.csproj", "{6C3F3D57-DA41-4E7A-82DA-8CA5F88DE459}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Telemetron.Test", "src\Common.Telemtron.Test\Common.Telemetron.Test.csproj", "{B5A32853-6BF8-4A3F-992F-0AAC49A99FDE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Telemetron.Console", "src\Common.Telemetron.Console\Common.Telemetron.Console.csproj", "{ADA7C6D3-78D0-4BC8-A78D-5F8FE095EECC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Telemetron.ApplicationInsights", "src\Common.Telemetron.ApplicationInsights\Common.Telemetron.ApplicationInsights.csproj", "{EC67A8FB-893E-464C-B4FF-12CE507346DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{6D1661A9-F2CB-444C-AFD3-A583F47272C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telemetron.Core.Unit.Tests", "test\unit\Telemetron.Core.Unit.Tests\Telemetron.Core.Unit.Tests.csproj", "{C3C5F3B7-04FB-44E6-B06C-18946A0071EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telemetron.Console.Unit.Tests", "test\unit\Telemetron.Console.Unit.Tests\Telemetron.Console.Unit.Tests.csproj", "{D17E4D8F-CD5C-4203-9BA5-713D69C66CEF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GlobalConfig", "GlobalConfig", "{8059F11B-AEA8-4650-8D42-51F1A6D0B31D}"
+	ProjectSection(SolutionItems) = preProject
+		common-prod.props = common-prod.props
+		common-test-legacy.props = common-test-legacy.props
+		common-test-sdk.props = common-test-sdk.props
+		common-test.props = common-test.props
+		common.props = common.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AITestExe", "test\exe\AITestExe\AITestExe.csproj", "{23EB9A93-3616-420D-8AB5-EAFD5D1B386B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Extension.Core", "src\Common.Extension.Core\Common.Extension.Core.csproj", "{73E6AEE7-D6A1-431D-9C70-05B302EB559F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F9E21A4-9B7D-4AEC-8FDB-A5FB34005F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F9E21A4-9B7D-4AEC-8FDB-A5FB34005F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F9E21A4-9B7D-4AEC-8FDB-A5FB34005F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F9E21A4-9B7D-4AEC-8FDB-A5FB34005F54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C3F3D57-DA41-4E7A-82DA-8CA5F88DE459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C3F3D57-DA41-4E7A-82DA-8CA5F88DE459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C3F3D57-DA41-4E7A-82DA-8CA5F88DE459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C3F3D57-DA41-4E7A-82DA-8CA5F88DE459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5A32853-6BF8-4A3F-992F-0AAC49A99FDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5A32853-6BF8-4A3F-992F-0AAC49A99FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5A32853-6BF8-4A3F-992F-0AAC49A99FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5A32853-6BF8-4A3F-992F-0AAC49A99FDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADA7C6D3-78D0-4BC8-A78D-5F8FE095EECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADA7C6D3-78D0-4BC8-A78D-5F8FE095EECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADA7C6D3-78D0-4BC8-A78D-5F8FE095EECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADA7C6D3-78D0-4BC8-A78D-5F8FE095EECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC67A8FB-893E-464C-B4FF-12CE507346DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC67A8FB-893E-464C-B4FF-12CE507346DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC67A8FB-893E-464C-B4FF-12CE507346DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC67A8FB-893E-464C-B4FF-12CE507346DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3C5F3B7-04FB-44E6-B06C-18946A0071EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3C5F3B7-04FB-44E6-B06C-18946A0071EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3C5F3B7-04FB-44E6-B06C-18946A0071EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3C5F3B7-04FB-44E6-B06C-18946A0071EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D17E4D8F-CD5C-4203-9BA5-713D69C66CEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D17E4D8F-CD5C-4203-9BA5-713D69C66CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D17E4D8F-CD5C-4203-9BA5-713D69C66CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D17E4D8F-CD5C-4203-9BA5-713D69C66CEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23EB9A93-3616-420D-8AB5-EAFD5D1B386B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23EB9A93-3616-420D-8AB5-EAFD5D1B386B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23EB9A93-3616-420D-8AB5-EAFD5D1B386B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23EB9A93-3616-420D-8AB5-EAFD5D1B386B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73E6AEE7-D6A1-431D-9C70-05B302EB559F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73E6AEE7-D6A1-431D-9C70-05B302EB559F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73E6AEE7-D6A1-431D-9C70-05B302EB559F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73E6AEE7-D6A1-431D-9C70-05B302EB559F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C3C5F3B7-04FB-44E6-B06C-18946A0071EA} = {6D1661A9-F2CB-444C-AFD3-A583F47272C0}
+		{D17E4D8F-CD5C-4203-9BA5-713D69C66CEF} = {6D1661A9-F2CB-444C-AFD3-A583F47272C0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D0D1D78-D3C4-4FF1-9420-8D6897DA9668}
+	EndGlobalSection
+EndGlobal

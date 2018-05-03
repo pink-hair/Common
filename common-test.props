@@ -1,0 +1,10 @@
+<Project>
+  <Import Project="common.props"/>
+  <PropertyGroup>
+    <TestCodeNoWarn></TestCodeNoWarn>
+    <NoWarn Condition="'$(NoWarn)' == ''">$(TestCodeNoWarn)</NoWarn>
+    <NoWarn Condition="'$(NoWarn)' != ''">$(TestCodeNoWarn);$(NoWarn)</NoWarn>
+    <IsPackable>false</IsPackable>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+</Project>

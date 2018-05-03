@@ -1,0 +1,159 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".g.cs" #>
+<# 
+	Tuple<string, string, string>[] levels = new Tuple<string, string, string>[] { 
+	new Tuple<string, string, string>("Debug", "DarkGray", "Black"), 
+	new Tuple<string, string, string>("Verbose", "Gray", "Black"), 
+	new Tuple<string, string, string>("Info", "White", "Black"), 
+	new Tuple<string, string, string>("Warning", "Yellow", "Black"), 
+	new Tuple<string, string, string>("Error", "Red", "Black"), 
+	new Tuple<string, string, string>("Fatal", "White", "DarkRed"), 
+	new Tuple<string, string, string>("OperationInfo", "DarkGray", "Black"), 
+	new Tuple<string, string, string>("OperationError", "DarkGray", "Black"), 
+	new Tuple<string, string, string>("Metric", "Magenta", "Black"), 
+	new Tuple<string, string, string>("Event", "Cyan", "Black")
+	};
+#>
+namespace Polytech.Common.Telemetron
+{
+	using System;
+	using System.Collections.Generic;
+	using System.Text;
+	using Polytech.Common.Telemetron;
+	using Polytech.Common.Telemetron.Configuration;
+
+    public class ConsoleConfiguration : TelemetronConfigurationBase, IConsoleConfiguration
+    {
+<# 
+	foreach(Tuple<string, string, string> level in levels)
+	{ #>
+	    /// <summary>
+        /// Gets or sets the foreground color for <see cref="EventSeverity.<#= level.Item1 #>"/> severity events that are emitted. 
+        /// </summary>
+        public ConsoleColor? <#= level.Item1 #>ForegroundColor { get; set; }
+
+		/// <summary>
+        /// Gets or sets the background color for <see cref="EventSeverity.<#= level.Item1 #>"/> severity events that are emitted. 
+        /// </summary>
+        public ConsoleColor? <#= level.Item1 #>BackgroundColor { get; set; }
+
+<#	} #>
+    }
+
+	public interface IConsoleConfiguration : ITelemetronConfigurationBase
+    {
+<# 
+	foreach(Tuple<string, string, string> level in levels)
+	{ #>
+	    /// <summary>
+        /// Gets the foreground color for <see cref="EventSeverity.<#= level.Item1 #>"/> severity events that are emitted. 
+        /// </summary>
+        ConsoleColor? <#= level.Item1 #>ForegroundColor { get; }
+
+		/// <summary>
+        /// Gets the background color for <see cref="EventSeverity.<#= level.Item1 #>"/> severity events that are emitted. 
+        /// </summary>
+        ConsoleColor? <#= level.Item1 #>BackgroundColor { get; }
+
+<#	} #>
+    }
+
+	public partial class ConsoleTelemetron 
+	{
+<# 
+	foreach(Tuple<string, string, string> level in levels)
+	{ 
+		char[] levelChars = level.Item1.ToCharArray();
+		levelChars[0] = Char.ToLowerInvariant(levelChars[0]);
+		string camelLevel = new String(levelChars);
+#>
+
+	    /// <summary>
+        /// Gets or sets the foreground color for <see cref="EventSeverity.<#= level.Item1 #>"/> severity events that are emitted. 
+        /// </summary>
+        private ConsoleColor <#= camelLevel #>ForegroundColor { get; set; }
+
+		/// <summary>
+        /// Gets or sets the background color for <see cref="EventSeverity.<#= level.Item1 #>"/> severity events that are emitted. 
+        /// </summary>
+        private ConsoleColor <#= camelLevel #>BackgroundColor { get; set; }
+
+<#	} #>
+
+		private void CopyConfigLocal(IConsoleConfiguration configuration)
+		{
+<# 
+	foreach(Tuple<string, string, string> level in levels)
+	{ 
+		char[] levelChars = level.Item1.ToCharArray();
+		levelChars[0] = Char.ToLowerInvariant(levelChars[0]);
+		string camelLevel = new String(levelChars);
+#>
+			//////
+			// <#= camelLevel #>
+			if (!configuration.<#= level.Item1 #>ForegroundColor.HasValue) 
+			{
+				this.<#= camelLevel #>ForegroundColor = ConsoleColor.<#= level.Item2 #>;
+			}
+			else 
+			{
+				this.<#= camelLevel #>ForegroundColor = configuration.<#= level.Item1 #>ForegroundColor.Value;
+			}
+
+			if (!configuration.<#= level.Item1 #>BackgroundColor.HasValue) 
+			{
+				this.<#= camelLevel #>BackgroundColor = ConsoleColor.<#= level.Item3 #>;
+			}
+			else 
+			{
+				this.<#= camelLevel #>BackgroundColor = configuration.<#= level.Item1 #>BackgroundColor.Value;
+			}
+
+<#	} #>
+	
+		}
+
+		private ConsoleColor GetForegroundColor(EventSeverity es)
+		{
+			switch (es)
+			{
+<# 
+	foreach(Tuple<string, string, string> level in levels)
+	{ 
+		char[] levelChars = level.Item1.ToCharArray();
+		levelChars[0] = Char.ToLowerInvariant(levelChars[0]);
+		string camelLevel = new String(levelChars);
+#>
+				case EventSeverity.<#= level.Item1 #>:
+					return this.<#= camelLevel #>ForegroundColor;
+<#	} #>
+				default: 
+					return this.infoForegroundColor;
+			}
+		}
+
+		
+		private ConsoleColor GetBackgroundColor(EventSeverity es)
+		{
+			switch (es)
+			{
+<# 
+	foreach(Tuple<string, string, string> level in levels)
+	{ 
+		char[] levelChars = level.Item1.ToCharArray();
+		levelChars[0] = Char.ToLowerInvariant(levelChars[0]);
+		string camelLevel = new String(levelChars);
+#>
+				case EventSeverity.<#= level.Item1 #>:
+					return this.<#= camelLevel #>BackgroundColor;
+<#	} #>
+				default: 
+					return this.infoBackgroundColor;
+			}
+		}
+	}
+}

@@ -1,0 +1,23 @@
+<Project>
+  <Import Project="common.props"/>
+  <PropertyGroup>
+    <ProductionCodeNoWarn></ProductionCodeNoWarn>
+    <NoWarn Condition="'$(NoWarn)' == ''">$(ProductionCodeNoWarn)</NoWarn>
+    <NoWarn Condition="'$(NoWarn)' != ''">$(ProductionCodeNoWarn);$(NoWarn)</NoWarn>
+  
+    <TargetFrameworks>$(CommonAllFrameworks)</TargetFrameworks>
+    <TargetFrameworks Condition="'$(Configuration)' == 'Debug'">$(CommonDebugFrameworks)</TargetFrameworks>
+  
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Stylecop.analyzers">
+      <Version>1.0.2</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

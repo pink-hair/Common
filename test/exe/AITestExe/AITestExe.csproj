@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Common.Telemetron.ApplicationInsights\Common.Telemetron.ApplicationInsights.csproj" />
+    <ProjectReference Include="..\..\..\src\Common.Telemetron.Core\Common.Telemetron.Core.csproj" />
+  </ItemGroup>
+
+</Project>
