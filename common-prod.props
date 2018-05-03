@@ -7,7 +7,7 @@
   
     <TargetFrameworks>$(CommonAllFrameworks)</TargetFrameworks>
     <TargetFrameworks Condition="'$(Configuration)' == 'Debug'">$(CommonDebugFrameworks)</TargetFrameworks>
-  
+    <PackageVersion>1.2.3-replacable</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup>
