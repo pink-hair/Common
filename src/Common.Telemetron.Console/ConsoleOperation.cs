@@ -1,4 +1,4 @@
-﻿namespace Polytech.Telemetron
+﻿namespace Polytech.Common.Telemetron
 {
     using System;
     using System.Collections.Generic;
