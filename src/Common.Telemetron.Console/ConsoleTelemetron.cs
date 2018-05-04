@@ -11,6 +11,7 @@
     using Polytech.Common.Telemetron;
     using Polytech.Common.Telemetron.Configuration;
     using Polytech.Common.Telemetron.Diagnostics;
+    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     /// <summary>
     /// A Telemetron for console output.
@@ -42,12 +43,6 @@
         }
 
         /// <summary>
-        /// Fires each time that an event is processed. Used for testing.
-        /// </summary>
-        internal event EventHandler<ConsoleEvent> EventEnqueued;
-
-
-        /// <summary>
         /// Creates a new operation.
         /// </summary>
         /// <param name="operationName">The name of the operation to create.</param>
@@ -58,11 +53,19 @@
             {
                 ICorrelationContext localCorrelationcontext = this.CorrelationContext;
                 long newOperationId = localCorrelationcontext.AddOperation();
+
+                string newOperationIdString = newOperationId.GetBase64String();
+                if (string.IsNullOrWhiteSpace(operationName))
+                {
+                    Diag("Attempting to create operation with null name. Resetting to randomized value. FTOsTooZ1kM");
+                    operationName = "ERR_NO_OPERATION_NAME " + newOperationIdString;
+                }
+
                 string cc = localCorrelationcontext.ToString();
 
                 this.CorrelationContext = localCorrelationcontext;
 
-                IOperation createdOperation = new ConsoleOperation(this, operationName, newOperationId.GetBase64String(), cc);
+                IOperation createdOperation = new ConsoleOperation(this, operationName, newOperationIdString, cc);
 
                 return createdOperation;
             }
@@ -90,11 +93,19 @@
                 CorrelationContext localCorrelationcontext = new CorrelationContext(parentContext);
 
                 long newOperationId = localCorrelationcontext.AddOperation();
+
+                string newOperationIdString = newOperationId.GetBase64String();
+                if (string.IsNullOrWhiteSpace(operationName))
+                {
+                    Diag("Attempting to create operation with null name. Resetting to randomized value. m7x/mk3e30M");
+                    operationName = "ERR_NO_OPERATION_NAME " + newOperationIdString;
+                }
+
                 string cc = localCorrelationcontext.ToString();
 
                 this.CorrelationContext = localCorrelationcontext;
 
-                IOperation createdOperation = new ConsoleOperation(this, operationName, newOperationId.GetBase64String(), cc, capturedCorrelationContext);
+                IOperation createdOperation = new ConsoleOperation(this, operationName, newOperationIdString, cc, capturedCorrelationContext);
 
                 return createdOperation;
             }
@@ -164,6 +175,8 @@
                 this.eventQueue.Enqueue(evt);
                 this.OnEventQueued(evt);
 
+
+
                 return true;
             }
             catch (Exception ex)
@@ -175,10 +188,7 @@
 
         internal virtual void OnEventQueued(ConsoleEvent ce)
         {
-            if (this.EventEnqueued != null)
-            {
-                this.EventEnqueued(this, ce);
-            }
+            Diag($"EVENT QUEUED {ce.EventSeverity.ToString()}/{ce.Message}/{ce.CodePoint ?? "ncp"}");
         }
 
         private async Task QueueJob(CancellationToken cancellationToken)
@@ -259,12 +269,20 @@
                 Console.Write(']');
                 WriteLine(message, foregroundColor, backgroundColor);
 
+                string json;
                 if (data.Count > 0)
                 {
+                    json = JsonConvert.SerializeObject(data, Formatting.Indented);
                     Write("Additional Data: ", foregroundColor, backgroundColor);
-                    WriteLine(JsonConvert.SerializeObject(data, Formatting.Indented), ConsoleColor.DarkGray, ConsoleColor.Black);
+                    WriteLine(json, ConsoleColor.DarkGray, ConsoleColor.Black);
                     Console.WriteLine();
                 }
+                else
+                {
+                    json = null;
+                }
+
+                this.TraceDiagnostic(eventSeverity, message, codePoint, json);
             }
             catch (Exception ex)
             {

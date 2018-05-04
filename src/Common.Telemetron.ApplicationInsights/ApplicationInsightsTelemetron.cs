@@ -10,6 +10,8 @@
     using Microsoft.ApplicationInsights.Extensibility;
     using Polytech.Common.Extension;
 
+    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+
     /// <summary>
     /// Telemetron for implementation of the Application Insights Telemetron.
     /// </summary>
@@ -44,6 +46,14 @@
             {
                 ICorrelationContext localCorrelationcontext = this.CorrelationContext;
                 long newOperationId = localCorrelationcontext.AddOperation();
+
+                string newOperationIdString = newOperationId.GetBase64String();
+                if (string.IsNullOrWhiteSpace(operationName))
+                {
+                    Diag("Attempting to create operation with null name. Resetting to randomized value. oOL8PlBx3kM");
+                    operationName = "ERR_NO_OPERATION_NAME " + newOperationIdString;
+                }
+
                 string cc = localCorrelationcontext.ToString();
 
                 this.CorrelationContext = localCorrelationcontext;
@@ -68,6 +78,14 @@
                 CorrelationContext localCorrelationcontext = new CorrelationContext(correlationContext);
 
                 long newOperationId = localCorrelationcontext.AddOperation();
+
+                string newOperationIdString = newOperationId.GetBase64String();
+                if (string.IsNullOrWhiteSpace(operationName))
+                {
+                    Diag("Attempting to create operation with null name. Resetting to randomized value. c7eyVLlbyUM");
+                    operationName = "ERR_NO_OPERATION_NAME " + newOperationIdString;
+                }
+
                 string cc = localCorrelationcontext.ToString();
 
                 this.CorrelationContext = localCorrelationcontext;

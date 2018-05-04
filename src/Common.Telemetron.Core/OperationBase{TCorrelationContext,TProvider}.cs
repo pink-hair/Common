@@ -85,6 +85,11 @@
         {
             this.stopwatch.Stop();
 
+            if (this.telemetryData.Count > 0)
+            {
+                Diag($"Operation contains telemetry Data. ## {nameof(this.TelemetryData)}.{nameof(this.TelemetryData.Count)} {this.telemetryData.Count} OPB/DRz430M");
+            }
+
             if (this.emitOperationMetricsDirectly)
             {
                 Diag($"Emitting Operation Complete metrics for {this.diagnosticOperationName}");
@@ -137,6 +142,11 @@
             this.EmitOperationEnd();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="soft"></param>
         public void SetOperationResult(OperationResult result, bool soft = false)
         {
             if (soft && this.result == OperationResult.NotSet)

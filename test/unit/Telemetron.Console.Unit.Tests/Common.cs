@@ -5,7 +5,9 @@ using System.Text;
 namespace Telemetron.Console.Unit.Tests
 {
     using Polytech.Common.Telemetron;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     internal static class Common
     {
         internal static ConsoleConfiguration CreateDefaultConfiguration()
@@ -20,6 +22,12 @@ namespace Telemetron.Console.Unit.Tests
                     EmitOperationMetrics = true
                 }
             };
+        }
+
+
+        internal static ConsoleTelemetron Get()
+        {
+            return new ConsoleTelemetron(CreateDefaultConfiguration());
         }
     }
 }

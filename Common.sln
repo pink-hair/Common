@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{6D1661A9-F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telemetron.Core.Unit.Tests", "test\unit\Telemetron.Core.Unit.Tests\Telemetron.Core.Unit.Tests.csproj", "{C3C5F3B7-04FB-44E6-B06C-18946A0071EA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telemetron.Console.Unit.Tests", "test\unit\Telemetron.Console.Unit.Tests\Telemetron.Console.Unit.Tests.csproj", "{D17E4D8F-CD5C-4203-9BA5-713D69C66CEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polytech.Common.Telemetron.Console.Unit.Tests", "test\unit\Telemetron.Console.Unit.Tests\Polytech.Common.Telemetron.Console.Unit.Tests.csproj", "{D17E4D8F-CD5C-4203-9BA5-713D69C66CEF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GlobalConfig", "GlobalConfig", "{8059F11B-AEA8-4650-8D42-51F1A6D0B31D}"
 	ProjectSection(SolutionItems) = preProject
@@ -32,7 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AITestExe", "test\exe\AITes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Extension.Core", "src\Common.Extension.Core\Common.Extension.Core.csproj", "{73E6AEE7-D6A1-431D-9C70-05B302EB559F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polytech.Common.Telemetron.Multi", "src\Polytech.Common.Telemetron.Multi\Polytech.Common.Telemetron.Multi.csproj", "{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polytech.Common.Telemetron.Multi", "src\Polytech.Common.Telemetron.Multi\Polytech.Common.Telemetron.Multi.csproj", "{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

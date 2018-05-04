@@ -1,10 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Telemetron.Core.Unit.Tests
 {
+    [ExcludeFromCodeCoverage]
     public static class Helpers
     {
         public static void AssertThrow<T>(string failureMessage, Action action)

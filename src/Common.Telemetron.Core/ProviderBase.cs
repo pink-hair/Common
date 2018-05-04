@@ -3,6 +3,9 @@ namespace Polytech.Common.Telemetron
 {
     using Common.Telemetron.Configuration;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+
+    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     public abstract class ProviderBase
     {
@@ -146,6 +149,15 @@ namespace Polytech.Common.Telemetron
             {
                 props[nameof(callerMemberName)] = callerMemberName;
             }
+        }
+
+        protected virtual void TraceDiagnostic(
+            EventSeverity eventSeverity,
+            string message,
+            string codePoint,
+            string serializedData)
+        {
+            Diag($"TRACE EMIT {eventSeverity.ToString()}/{message}/{codePoint ?? "ncp"}/{serializedData ?? "nsd"}");
         }
     }
 }

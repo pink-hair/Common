@@ -6,9 +6,11 @@ using Polytech.Common.Telemetron;
 
 namespace Telemetron.Core.Unit.Tests
 {
+    using System.Diagnostics.CodeAnalysis;
     using static Helpers;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class CorreationCoreTests
     {
         private const long RootValue = 1337L;

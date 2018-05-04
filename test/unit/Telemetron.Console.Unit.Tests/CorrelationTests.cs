@@ -4,10 +4,17 @@ using Polytech.Common.Telemetron;
 
 namespace Telemetron.Console.Unit.Tests
 {
+    using System.Diagnostics.CodeAnalysis;
     using static global::Telemetron.Console.Unit.Tests.Common;
+    using static global::Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+    using System.Linq;
+
+    [ExcludeFromCodeCoverage]
     [TestClass]
     public class CorrelationTests
     {
+        private static readonly char[] spaceSplit = new[] { ' ' };
+
         [TestMethod]
         public void TestBasicEmission()
         {
@@ -15,16 +22,17 @@ namespace Telemetron.Console.Unit.Tests
 
             ConsoleTelemetron ct = new ConsoleTelemetron(CreateDefaultConfiguration());
 
-            List<ConsoleEvent> ces = new List<ConsoleEvent>();
-            ct.EventEnqueued += (sender, args) =>
+            using (TraceListenerHarness harness = new TraceListenerHarness(Source))
             {
-                ces.Add(args);
-            };
 
-            ct.Info("foo");
-            ct.Info("bar");
+                ct.Info("foo");
+                ct.Info("bar");
 
-            Assert.AreEqual(2, ces.Count);
+                // we have to use GTE for counte as
+                // we dont know how many additional events
+                // (we do know how many, but coupling to that number is stupid).
+                Assert.IsTrue(harness.Events.Count >= 2);
+            }
         }
 
 
@@ -34,29 +42,26 @@ namespace Telemetron.Console.Unit.Tests
         {
             ConsoleTelemetron ct = new ConsoleTelemetron(CreateDefaultConfiguration());
 
-            List<ConsoleEvent> ces = new List<ConsoleEvent>();
-            ct.EventEnqueued += (sender, args) =>
+            using (TraceListenerHarness harness = new TraceListenerHarness(Source))
             {
-                ces.Add(args);
-            };
+                ct.Info("foo");
+                ct.Info("bar");
 
-            ct.Info("foo");
-            ct.Info("bar");
+                string operationId;
+                using (IOperation op = ct.CreateOperation("foo"))
+                {
+                    operationId = op.OperationId;
 
-            string operationId;
-            using (IOperation op = ct.CreateOperation("foo"))
-            {
-                operationId = op.OperationId;
+                    ct.Info("whee");
+                }
 
-                ct.Info("whee");
+                //Assert.AreEqual(6, ces.Count);
+
+                var maxDepth = GetMaxCorrelationContextDepth(harness.Events);
+
+                Assert.AreEqual(5, maxDepth[1]);
+                Assert.AreEqual(2, maxDepth[2]);
             }
-
-            Assert.AreEqual(6, ces.Count);
-
-            var maxDepth = GetMaxCorrelationContextDepth(ces);
-
-            Assert.AreEqual(5, maxDepth[1]);
-            Assert.AreEqual(1, maxDepth[2]);
 
             // events can arrive out of order 
         }
@@ -66,59 +71,58 @@ namespace Telemetron.Console.Unit.Tests
         {
             ConsoleTelemetron ct = new ConsoleTelemetron(CreateDefaultConfiguration());
 
-            List<ConsoleEvent> ces = new List<ConsoleEvent>();
-            ct.EventEnqueued += (sender, args) =>
+            using (TraceListenerHarness harness = new TraceListenerHarness(Source))
             {
-                // get rid of metrics
-                if (args.EventSeverity == EventSeverity.Metric || args.EventSeverity == EventSeverity.Event)
+
+                ct.Info("foo");
+                ct.Info("bar");
+
+                string operationIdFirst;
+                string operationIdSecond;
+                using (IOperation op = ct.CreateOperation("foo"))
                 {
-                    return;
-                }
-
-                ces.Add(args);
-            };
-
-            ct.Info("foo");
-            ct.Info("bar");
-
-            string operationIdFirst;
-            string operationIdSecond;
-            using (IOperation op = ct.CreateOperation("foo"))
-            {
-                operationIdFirst = op.OperationId;
-
-                ct.Info("whee");
-
-                using (IOperation op2 = ct.CreateOperation("foo"))
-                {
-                    operationIdSecond = op.OperationId;
+                    operationIdFirst = op.OperationId;
 
                     ct.Info("whee");
+
+                    using (IOperation op2 = ct.CreateOperation("foo"))
+                    {
+                        operationIdSecond = op.OperationId;
+
+                        ct.Info("whee");
+                    }
                 }
+
+                var maxDepth = GetMaxCorrelationContextDepth(harness.Events);
+
+                Assert.AreEqual(5, maxDepth[1]);
+                Assert.AreEqual(5, maxDepth[2]);
+                Assert.AreEqual(2, maxDepth[3]);
             }
-
-            Assert.AreEqual(6, ces.Count);
-
-            var maxDepth = GetMaxCorrelationContextDepth(ces);
-
-            Assert.AreEqual(3, maxDepth[1]);
-            Assert.AreEqual(2, maxDepth[2]);
-            Assert.AreEqual(1, maxDepth[3]);
         }
 
-        private static Dictionary<int, int> GetMaxCorrelationContextDepth(List<ConsoleEvent> ces)
+        private static Dictionary<int, int> GetMaxCorrelationContextDepth(IEnumerable<TraceEventEvent> tee)
         {
+            // new collection.
+            var ces = tee.Where(t => t.Actual.Contains("irE1MsXYqkM")).ToArray();
+
             Dictionary<int, int> result = new Dictionary<int, int>();
-            foreach (ConsoleEvent evt in ces)
+            foreach (TraceEventEvent evt in ces)
             {
-                string[] parts = evt.CorrelationContext.Split('|');
-                if (!result.ContainsKey(parts.Length))
+                string[] parts = evt.Data.Split(spaceSplit, System.StringSplitOptions.RemoveEmptyEntries);
+                if(parts.Length < 2)
                 {
-                    result[parts.Length] = 1;
+                    continue; 
+                }
+
+                int length = int.Parse(parts[0]);
+                if (!result.ContainsKey(length))
+                {
+                    result[length] = 1;
                 }
                 else
                 {
-                    result[parts.Length] = result[parts.Length] + 1;
+                    result[length] = result[length] + 1;
                 }
 
             }

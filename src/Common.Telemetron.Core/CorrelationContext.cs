@@ -5,6 +5,8 @@
     using System.Threading;
     using Common.Telemetron.Obscure.ValueTypes;
 
+    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+
     /// <summary>
     /// A correlation context struct. Designed to be paired with <see cref="AsyncLocal{T}"/>.
     /// </summary>
@@ -120,17 +122,39 @@
         /// <summary>
         /// Gets the current Operation Id that this <see cref="CorrelationContext"/> represents.
         /// </summary>
-        public long CurrentId => this.currentId;
+        public long CurrentId
+        {
+            get
+            {
+                Diag($"{nameof(CorrelationContext)}.{nameof(currentId)} GET = {this.currentId} xXg+l2I8z0M");
+
+                return this.currentId;
+            }
+        }
 
         /// <summary>
         /// Gets the Id of the parent Operation Id that this <see cref="CorrelationContext"/> represents.
         /// </summary>
-        public long ParentId => this.parentId;
+        public long ParentId
+        {
+            get
+            {
+                Diag($"{nameof(CorrelationContext)}.{nameof(ParentId)} GET = {this.parentId} vSklV96U0kM");
+                return this.parentId;
+            }
+        }
 
         /// <summary>
         /// Gets the Root ([0]) operation that was set when the correlation context. If the correlation context has traversed circularly, 
         /// </summary>
-        public long RootId => this.rootId;
+        public long RootId
+        {
+            get
+            {
+                Diag($"{nameof(CorrelationContext)}.{nameof(RootId)} GET = {this.rootId} 1JAv12nIt0M");
+                return this.rootId;
+            }
+        }
 
         /// <summary>
         /// Gets the current operation position circular array object.
@@ -188,6 +212,8 @@
                 this.parentId = localStack[cap.Position];
             }
 
+            Diag($"{nameof(CorrelationContext)}.{nameof(this.RemoveOperation)} ID = {removedOperation} POS = {this.currentOperationPosition.Position} Npm2AJtM20M");
+
             return removedOperation;
         }
 
@@ -209,6 +235,7 @@
 
             byte[] capturedContext = this.Capture();
             byte[] buffer = new byte[OPERATIONIDBYTELENGTH];
+            int contextLength = capturedContext.Length / OPERATIONIDBYTELENGTH;
 
             for (int i = 0; i < capturedContext.Length; i += OPERATIONIDBYTELENGTH)
             {
@@ -225,6 +252,10 @@
             }
 
             string result = operationIdBuilder.ToString();
+
+            Diag($"{nameof(CorrelationContext)}.{nameof(this.Get)} Ctx = {result} afg8QjR8rkM");
+            Diag($"{nameof(CorrelationContext)}.{nameof(this.Get)}.Length ## {contextLength} irE1MsXYqkM");
+
 
             return result;
         }
@@ -313,6 +344,8 @@
             // move internal variables
             this.parentId = this.currentId;
             this.currentId = operationId;
+
+            Diag($"{nameof(CorrelationContext)}.{nameof(this.AddOperationInternal)} ID = {operationId} POS = {this.currentOperationPosition.Position} TQonfSaFw0M");
         }
     }
 }

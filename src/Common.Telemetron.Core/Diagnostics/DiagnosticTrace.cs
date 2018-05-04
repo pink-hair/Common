@@ -10,6 +10,8 @@
     public class DiagnosticTrace :
         ITraceProvider
     {
+        private static bool TelemetryEnabled = true;
+
         private static DiagnosticTrace instance = new DiagnosticTrace();
 
         private TraceSource diagnosticTraceSource;
@@ -22,6 +24,8 @@
 
         public static DiagnosticTrace Instance => instance;
 
+        internal static TraceSource Source => instance.diagnosticTraceSource;
+
         public void ListenWith(TraceListener listener)
         {
             this.diagnosticTraceSource.Listeners.Add(listener);
@@ -29,27 +33,16 @@
 
         public bool Trace(EventSeverity eventSeverity, string message, string codePoint = null, Dictionary<string, string> data = null, [CallerMemberName] string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber] int callerLineNumber = -1)
         {
-            try
-            {
-
-                string msg = CreateTraceMessage(message, null, codePoint, data);
-
-                this.diagnosticTraceSource.TraceEvent(
-                    TranslateEvent(eventSeverity),
-                    1,
-                    msg);
-
-                return true;
-            }
-            catch
-            {
-                // we are lost
-                return false;
-            }
+            return this.Trace(eventSeverity, message, null, codePoint, data, callerMemberName, callerFilePath, callerLineNumber);
         }
 
         public bool Trace(EventSeverity eventSeverity, string message, Exception exception, string codePoint = null, Dictionary<string, string> data = null, [CallerMemberName] string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber] int callerLineNumber = -1)
         {
+            if (!TelemetryEnabled)
+            {
+                return true;
+            }
+
             try
             {
                 string msg = CreateTraceMessage(message, exception, codePoint, data);
@@ -67,7 +60,7 @@
 
                 this.diagnosticTraceSource.TraceEvent(
                     TranslateEvent(eventSeverity),
-                    1,
+                    randoId,
                     msg);
 
                 return true;
@@ -88,6 +81,11 @@
         public static bool Diag(string message) => Instance.Info(message);
 
         public static bool Diag(string message, Exception exception) => Instance.Error(message, exception);
+
+        public static void DisableTelemetry()
+        {
+            TelemetryEnabled = false;
+        }
 
         private static string CreateTraceMessage(string message, Exception exception, string codePoint, Dictionary<string, string> data)
         {

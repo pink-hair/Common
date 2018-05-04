@@ -7,7 +7,7 @@
     /// </summary>
     public class ConsoleOperation : CorrelatedOperationBase<byte[], ConsoleTelemetron>, IOperation
     {
-        private byte[] capturedContext;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConsoleOperation"/> class.
@@ -20,7 +20,7 @@
         public ConsoleOperation(ConsoleTelemetron provider, string operationName, string newOperationId, string correlationContext, byte[] capturedContext = null)
             : base(provider, operationName, newOperationId, correlationContext, capturedContext)
         {
-            this.capturedContext = capturedContext;
+
         }
 
         /// <summary>
