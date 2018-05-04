@@ -1,11 +1,9 @@
-﻿namespace Telemetron.Test
+﻿namespace Polytech.Common.Telemetron.Configuration
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using Polytech.Common.Telemetron.Configuration;
-
-    public class TestTelemetronConfiguration : TelemetronConfigurationBase, ITelemetronConfigurationBase
+    public class TestTelemetronConfiguration : TelemetronConfigurationBase, ITestTelemetronConfiguration
     {
+        public bool EmitTestName { get; set; }
+
+        public bool EmitCurrentTestOutcome { get; set; }
     }
 }

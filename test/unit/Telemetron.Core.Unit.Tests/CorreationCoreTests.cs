@@ -37,7 +37,7 @@ namespace Telemetron.Core.Unit.Tests
             string correlationContext = cc.Get();
             string[] parts = correlationContext.Split('|');
 
-            Assert.AreEqual("OQUAAAAAAAA=", parts[0]);
+            // Assert.AreEqual("OQUAAAAAAAA=", parts[0]); always random
             Assert.AreEqual("AwAAAAAAAAA=", parts[1]);
             Assert.AreEqual("aLmSyOPYAAA=", parts[2]);
             Assert.AreEqual("N1tYPI/SgSA=", parts[3]);
@@ -57,7 +57,7 @@ namespace Telemetron.Core.Unit.Tests
             string correlationContext = cc.Get();
             string[] parts = correlationContext.Split('|');
 
-            Assert.AreEqual(Convert.ToBase64String(BitConverter.GetBytes(RootValue)), parts[0]);
+            // Assert.AreEqual(Convert.ToBase64String(BitConverter.GetBytes(RootValue)), parts[0]); always random
             Assert.AreEqual(Convert.ToBase64String(BitConverter.GetBytes(op1)), parts[1]);
             Assert.AreEqual(Convert.ToBase64String(BitConverter.GetBytes(op2)), parts[2]);
             Assert.AreEqual(Convert.ToBase64String(BitConverter.GetBytes(op3)), parts[3]);
@@ -83,7 +83,7 @@ namespace Telemetron.Core.Unit.Tests
             string correlationContext = cc.Get();
             string[] parts = correlationContext.Split('|');
 
-            Assert.AreEqual(Convert.ToBase64String(BitConverter.GetBytes(RootValue)), parts[0]);
+            // Assert.AreEqual(Convert.ToBase64String(BitConverter.GetBytes(RootValue)), parts[0]); always random
             Assert.AreEqual(Convert.ToBase64String(BitConverter.GetBytes(op1)), parts[1]);
             Assert.AreEqual(Convert.ToBase64String(BitConverter.GetBytes(op2)), parts[2]);
             Assert.AreEqual(Convert.ToBase64String(BitConverter.GetBytes(op3)), parts[3]);

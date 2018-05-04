@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using Polytech.Common.Telemetron.Configuration;
 
     /// <summary>
     /// A provider that supports the concept of operations. 
@@ -15,5 +16,7 @@
         IOperation CreateOperation(string operationName);
 
         IOperation CreateOperation(string operationName, T correlationContext);
+
+        IOperationConfiguration OperationConfiguration { get; }
     }
 }

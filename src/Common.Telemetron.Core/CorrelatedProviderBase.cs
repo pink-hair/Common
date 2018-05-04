@@ -1,8 +1,5 @@
 ﻿namespace Polytech.Common.Telemetron
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Threading;
     using Common.Telemetron.Configuration;
 
@@ -13,7 +10,11 @@
     {
         private AsyncLocal<ICorrelationContext> correlationContext;
 
-        public CorrelatedProviderBase(ITelemetronConfigurationBase configuration) 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CorrelatedProviderBase"/> class.
+        /// </summary>
+        /// <param name="configuration">The inherited configuration from the implementing class to pass to the base class.</param>
+        protected CorrelatedProviderBase(ITelemetronConfigurationBase configuration) 
             : base(configuration)
         {
             this.correlationContext = new AsyncLocal<ICorrelationContext>();

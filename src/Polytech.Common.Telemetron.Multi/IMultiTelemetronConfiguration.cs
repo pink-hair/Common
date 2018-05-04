@@ -1,11 +1,10 @@
 ﻿namespace Polytech.Common.Telemetron.Configuration
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
+    /// <summary>
+    /// Configuration for the <see cref="MultiTelemetron{T}"/>
+    /// </summary>
     public interface IMultiTelemetronConfiguration : ITelemetronConfigurationBase
     {
-        
+        // no configuration yet.
     }
 }

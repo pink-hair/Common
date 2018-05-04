@@ -4,21 +4,16 @@ using Polytech.Common.Telemetron;
 
 namespace Telemetron.Console.Unit.Tests
 {
+    using static global::Telemetron.Console.Unit.Tests.Common;
     [TestClass]
     public class CorrelationTests
     {
         [TestMethod]
         public void TestBasicEmission()
         {
-            ConsoleConfiguration cc = new ConsoleConfiguration()
-            {
-                EmitAdditionalData = true,
-                EmitCodePoint = true,
-                EmitCorrelationContext = true
-            };
+            
 
-
-            ConsoleTelemetron ct = new ConsoleTelemetron(cc);
+            ConsoleTelemetron ct = new ConsoleTelemetron(CreateDefaultConfiguration());
 
             List<ConsoleEvent> ces = new List<ConsoleEvent>();
             ct.EventEnqueued += (sender, args) =>
@@ -32,17 +27,12 @@ namespace Telemetron.Console.Unit.Tests
             Assert.AreEqual(2, ces.Count);
         }
 
+
+
         [TestMethod]
         public void TestOperationWithCorrenationContext_Depth_2()
         {
-            ConsoleConfiguration cc = new ConsoleConfiguration()
-            {
-                EmitAdditionalData = true,
-                EmitCodePoint = true,
-                EmitCorrelationContext = true
-            };
-
-            ConsoleTelemetron ct = new ConsoleTelemetron(cc);
+            ConsoleTelemetron ct = new ConsoleTelemetron(CreateDefaultConfiguration());
 
             List<ConsoleEvent> ces = new List<ConsoleEvent>();
             ct.EventEnqueued += (sender, args) =>
@@ -74,14 +64,7 @@ namespace Telemetron.Console.Unit.Tests
         [TestMethod]
         public void TestOperationWithCorrenationContext_Depth_3()
         {
-            ConsoleConfiguration cc = new ConsoleConfiguration()
-            {
-                EmitAdditionalData = true,
-                EmitCodePoint = true,
-                EmitCorrelationContext = true
-            };
-
-            ConsoleTelemetron ct = new ConsoleTelemetron(cc);
+            ConsoleTelemetron ct = new ConsoleTelemetron(CreateDefaultConfiguration());
 
             List<ConsoleEvent> ces = new List<ConsoleEvent>();
             ct.EventEnqueued += (sender, args) =>

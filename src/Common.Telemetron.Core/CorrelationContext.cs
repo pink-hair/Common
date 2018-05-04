@@ -28,15 +28,14 @@
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CorrelationContext"/> struct.
-        /// 
         /// </summary>
-        /// <param name="rootSessionId"></param>
+        /// <param name="rootSessionId">Creates a new Context with a seeded random first Id.</param>
         public CorrelationContext(long rootSessionId)
         {
             long sid;
             unchecked
             {
-                 sid = rootSessionId + rng.NextInt64();
+                sid = rootSessionId + rng.NextInt64();
             }
 
             this.currentOperationPosition = new CircularArrayPosition(OPERATIONSTACKSIZE);
@@ -52,6 +51,10 @@
             this.rootId = sid;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CorrelationContext"/> struct from the captured correlation context. This context may be from another thread, application domain, process, machine or even application. 
+        /// </summary>
+        /// <param name="capturedContext">The captured context to recreate the operation tree.</param>
         public CorrelationContext(byte[] capturedContext)
         {
             if (capturedContext == null)
@@ -90,7 +93,6 @@
                     CircularArrayPosition parentFinder = this.currentOperationPosition;
 
                     // if rolled over, we will have a parent.
-                    //
                     if (parentFinder.TotalTraversal == 1)
                     {
                         this.parentId = -1;
@@ -105,7 +107,6 @@
                     {
                         // might have traversal and be at [0].
                         // need to use circular array counter;
-
                         parentFinder--;
                         this.currentId = localStack[parentFinder.Position];
 
@@ -113,16 +114,22 @@
                         this.parentId = localStack[parentFinder.Position];
                     }
                 }
-
-                // we are now at the end of the operation position.
-
             }
         }
 
+        /// <summary>
+        /// Gets the current Operation Id that this <see cref="CorrelationContext"/> represents.
+        /// </summary>
         public long CurrentId => this.currentId;
 
+        /// <summary>
+        /// Gets the Id of the parent Operation Id that this <see cref="CorrelationContext"/> represents.
+        /// </summary>
         public long ParentId => this.parentId;
 
+        /// <summary>
+        /// Gets the Root ([0]) operation that was set when the correlation context. If the correlation context has traversed circularly, 
+        /// </summary>
         public long RootId => this.rootId;
 
         /// <summary>
@@ -143,6 +150,11 @@
             return newOperationId;
         }
 
+        /// <summary>
+        /// Adds the specified operation Id to the stack.
+        /// </summary>
+        /// <param name="operationId">The operation Id to Add.</param>
+        /// <returns>the operation provided.</returns>
         public long AddOperation(long operationId)
         {
             this.AddOperationInternal(operationId);
@@ -150,6 +162,10 @@
             return operationId;
         }
 
+        /// <summary>
+        /// Removes the current operation Id from the stack and returns it.
+        /// </summary>
+        /// <returns>The Operation id that was removed.</returns>
         public long RemoveOperation()
         {
             long removedOperation;
@@ -213,6 +229,10 @@
             return result;
         }
 
+        /// <summary>
+        /// Captures the current correlation context and returns it. 
+        /// </summary>
+        /// <returns>The captured context.</returns>
         public byte[] Capture()
         {
             byte[] result;

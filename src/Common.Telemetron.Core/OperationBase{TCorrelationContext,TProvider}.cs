@@ -1,5 +1,6 @@
 ﻿namespace Polytech.Common.Telemetron
 {
+    using Polytech.Common.Telemetron.Configuration;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -8,6 +9,7 @@
     public abstract class OperationBase<TCorrelationContext, TProvider> : IOperation
         where TProvider : IOperationProvider<TCorrelationContext>, ITraceProvider, IMetricProvider, ICorrelatedProvider
     {
+        private byte[] capturedContext;
         private readonly string operationName;
         private readonly string operationId;
         private readonly string correlationContext;
@@ -22,8 +24,11 @@
 
         private Exception capturedException;
 
+        private bool emitOperationMetricsDirectly;
+
         public OperationBase(TProvider provider, string operationName, string newOperationId, string correlationContext)
         {
+
             this.operationName = operationName ?? throw new ArgumentNullException(nameof(operationName));
             this.operationId = newOperationId ?? throw new ArgumentNullException(nameof(newOperationId));
             this.correlationContext = correlationContext ?? throw new ArgumentNullException(nameof(correlationContext));
@@ -31,6 +36,7 @@
             this.telemetryData = new Dictionary<string, string>();
 
             this.provider = provider;
+            this.emitOperationMetricsDirectly = provider.OperationConfiguration.EmitOperationMetrics;
 
             this.telemetryData[nameof(this.operationName)] = this.operationName;
             this.telemetryData[nameof(this.operationId)] = this.operationId;
@@ -52,8 +58,11 @@
         {
             this.stopwatch.Stop();
 
-            this.provider.Metric($"{this.operationName}/metrics/duration", this.stopwatch.ElapsedMilliseconds, this.telemetryData);
-            this.provider.Metric($"{this.operationName}/metrics/outcome", (int)this.result, this.telemetryData);
+            if (this.emitOperationMetricsDirectly)
+            {
+                this.provider.Metric($"{this.operationName}/metrics/duration", this.stopwatch.ElapsedMilliseconds, this.telemetryData);
+                this.provider.Metric($"{this.operationName}/metrics/outcome", (int)this.result, this.telemetryData);
+            }
         }
 
         public virtual IDictionary<string, string> TelemetryData => this.telemetryData;
@@ -73,7 +82,7 @@
             ICorrelationContext ctx = this.provider.CorrelationContext;
             long removed = ctx.RemoveOperation();
             this.provider.CorrelationContext = ctx;
-           
+
             this.EmitOperationEnd();
         }
 

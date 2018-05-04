@@ -7,27 +7,30 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
+    using Polytech.Common.Extension;
     using Polytech.Common.Telemetron;
     using Polytech.Common.Telemetron.Configuration;
     using Polytech.Common.Telemetron.Diagnostics;
 
+    /// <summary>
+    /// A Telemetron for console output.
+    /// </summary>
     public partial class ConsoleTelemetron : CorrelatedProviderBase, ITelemetronProvider<byte[]>, IDisposable
     {
         private ConcurrentQueue<ConsoleEvent> eventQueue;
         private Task queueTask;
         private CancellationTokenSource cancellationTokenSource;
         private CancellationToken cancellationToken;
-        
-        /// <summary>
-        /// Fires each time that an event is processed. Used for testing.
-        /// </summary>
-        internal event EventHandler<ConsoleEvent> EventEnqueued;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleTelemetron"/> class.
+        /// </summary>
+        /// <param name="configuration"></param>
         public ConsoleTelemetron(IConsoleConfiguration configuration)
-            : base(configuration)
+    : base(configuration)
         {
             this.CopyConfigLocal(configuration);
-            
+
             this.CorrelationContext = new CorrelationContext(1337);
 
             this.cancellationTokenSource = new CancellationTokenSource();
@@ -38,6 +41,17 @@
             this.queueTask = this.QueueJob(this.cancellationToken);
         }
 
+        /// <summary>
+        /// Fires each time that an event is processed. Used for testing.
+        /// </summary>
+        internal event EventHandler<ConsoleEvent> EventEnqueued;
+
+
+        /// <summary>
+        /// Creates a new operation.
+        /// </summary>
+        /// <param name="operationName">The name of the operation to create.</param>
+        /// <returns>A correlated Operation.</returns>
         public IOperation CreateOperation(string operationName)
         {
             try
@@ -58,8 +72,14 @@
 
                 return new NullOperation();
             }
-
         }
+
+        /// <summary>
+        /// Creates a new operation.
+        /// </summary>
+        /// <param name="operationName">The name of the operation to create.</param>
+        /// <param name="parentContext">Create an operation using another context for the duration of the operation.</param>
+        /// <returns>A correlated Operation.</returns>
 
         public IOperation CreateOperation(string operationName, byte[] parentContext)
         {
@@ -67,33 +87,20 @@
             {
                 byte[] capturedCorrelationContext = this.CorrelationContext.Capture();
 
-                try
-                {
-                    CorrelationContext localCorrelationcontext = new CorrelationContext(parentContext);
+                CorrelationContext localCorrelationcontext = new CorrelationContext(parentContext);
 
-                    long newOperationId = localCorrelationcontext.AddOperation();
-                    string cc = localCorrelationcontext.ToString();
+                long newOperationId = localCorrelationcontext.AddOperation();
+                string cc = localCorrelationcontext.ToString();
 
-                    this.CorrelationContext = localCorrelationcontext;
+                this.CorrelationContext = localCorrelationcontext;
 
-                    IOperation createdOperation = new ConsoleOperation(this, operationName, newOperationId.GetBase64String(), cc);
+                IOperation createdOperation = new ConsoleOperation(this, operationName, newOperationId.GetBase64String(), cc, capturedCorrelationContext);
 
-                    return createdOperation;
-                }
-                catch (Exception ex)
-                {
-                    DiagnosticTrace.Instance.Error("An unexpected error occurred when attempting to create an operation", ex, "cd11de1d-c4b6-406c-937e-37bc85eb4370");
-
-                    return new NullOperation();
-                }
-                finally
-                {
-                    this.CorrelationContext = new CorrelationContext(capturedCorrelationContext);
-                }
+                return createdOperation;
             }
             catch (Exception ex)
             {
-                DiagnosticTrace.Instance.Error("An unexpected error occurred when attempting to reinstate the correlation context", ex, "cb64280a-daa2-43e5-b4f5-fc69f7dbfeb1");
+                DiagnosticTrace.Instance.Error("An unexpected error occurred when attempting to create an operation", ex, "cd11de1d-c4b6-406c-937e-37bc85eb4370");
 
                 return new NullOperation();
             }
@@ -281,24 +288,20 @@
             Console.ResetColor();
         }
 
-        private static string GetTimeString(DateTime dt)
-        {
-            if (dt.Hour == 0 && dt.Minute == 0)
-            {
-                // midnight
-                return dt.ToString("MMM-dd-YY HH:mm:ss.fff") + " midnight";
-            }
-            else
-            {
-                return dt.ToString("HH:mm:ss.fff");
-            }
-        }
-
         public void Dispose()
         {
             this.cancellationTokenSource.CancelAfter(300);
 
             Thread.Sleep(300);
+        }
+
+        /// <summary>
+        /// Repply the origin context captured as part of an operation.
+        /// </summary>
+        /// <param name="capturedContext">the context to reapply.</param>
+        void ICorrelatedProvider.ReapplyOriginContext(byte[] capturedContext)
+        {
+            this.CorrelationContext = new CorrelationContext(capturedContext);
         }
     }
 }

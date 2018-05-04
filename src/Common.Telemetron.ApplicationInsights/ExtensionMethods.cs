@@ -5,8 +5,8 @@
     using System.Text;
     using Microsoft.ApplicationInsights.Channel;
     using Microsoft.ApplicationInsights.DataContracts;
+    using Polytech.Common.Extension;
 
-    //
     public static class ExtensionMethods
     {
         public static void SetOperationInfo(this ITelemetry telemetry, ApplicationInsightsTelemetron provider)

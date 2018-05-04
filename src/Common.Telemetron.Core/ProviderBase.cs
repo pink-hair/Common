@@ -22,6 +22,8 @@ namespace Polytech.Common.Telemetron
 
         private bool emitCorrelationContext;
 
+        private IOperationConfiguration operationConfiguration;
+
         public ProviderBase(ITelemetronConfigurationBase configuration)
         {
             if (configuration == null)
@@ -48,6 +50,8 @@ namespace Polytech.Common.Telemetron
             this.emitCallerLineNumber = configuration.EmitCallerLineNumber;
             this.emitAdditionalData = configuration.EmitAdditionalData;
             this.emitCorrelationContext = configuration.EmitCorrelationContext;
+            this.operationConfiguration = configuration.OperationConfiguration
+                ?? throw new ArgumentNullException($"{nameof(configuration)}.{nameof(configuration.OperationConfiguration)}");
 
             // dont save configuration reference object
             // setup runtime id
@@ -71,6 +75,36 @@ namespace Polytech.Common.Telemetron
         protected bool EmitCorrelationContext => this.emitCorrelationContext;
 
         protected TelemetronNullCodePointDelegte NullCodepointActionDelegate => this.nullCodepointActionDelegate;
+
+        public IOperationConfiguration OperationConfiguration => this.operationConfiguration;
+
+        /// <summary>
+        /// Gets the current time string from a date time object.
+        /// </summary>
+        /// <param name="dt">The date time object to stringify</param>
+        /// <returns>The shortest time string possible.</returns>
+        protected static string GetTimeString(DateTime dt)
+        {
+            if (dt.Hour == 0 && dt.Minute == 0)
+            {
+                // midnight
+                return dt.ToString("MMM-dd-YY HH:mm:ss.fff") + " midnight";
+            }
+            else
+            {
+                if (dt.Second == 0)
+                {
+                    if (dt.Millisecond == 0)
+                    {
+                        return dt.ToString("HH:mm");
+                    }
+
+                    return dt.ToString("HH:mm:ss");
+                }
+
+                return dt.ToString("HH:mm:ss.fff");
+            }
+        }
 
         protected void AddCodepoint(string message, string codePoint, string callerMemberName, string callerFilePath, int callerLineNumber, Dictionary<string, string> props)
         {

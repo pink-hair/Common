@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Polytech.Common.Telemetron.Constants
+﻿namespace Polytech.Common.Telemetron.Constants
 {
     public static class EventConstants
     {

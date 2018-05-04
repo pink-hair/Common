@@ -1,9 +1,9 @@
-﻿namespace Polytech.Common.Extension.Core
+﻿namespace Polytech.Common.Extension
 {
     /// <summary>
     /// Misc Extension Methods.
     /// </summary>
-    public static partial class MiscExtensionMethods
+    public static class MiscExtensionMethods
     {
         /// <summary>
         /// Gets a safe (non-null) handle to this type. If the object being called is null,  a new one will be created.

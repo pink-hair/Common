@@ -6,13 +6,21 @@ namespace Polytech.Common.Telemetron
 {
     using Microsoft.ApplicationInsights;
     using Microsoft.ApplicationInsights.Extensibility;
-    public class ApplicationInsightsOperation : OperationBase<byte[], ApplicationInsightsTelemetron>, IOperation, IDisposable
+    public class ApplicationInsightsOperation : CorrelatedOperationBase<byte[], ApplicationInsightsTelemetron>, IOperation, IDisposable
     {
         private readonly ApplicationInsightsOperationTelemetry aiTelemetry;
         private IOperationHolder<ApplicationInsightsOperationTelemetry> operationHandle;
 
-        public ApplicationInsightsOperation(ApplicationInsightsTelemetron provider, string operationName, string newOperationId, string correlationContext)
-            : base(provider, operationName, newOperationId, correlationContext)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationInsightsOperation"/> class.
+        /// </summary>
+        /// <param name="provider">The Application Insights provider that created this operation.</param>
+        /// <param name="operationName">The name of the operation.</param>
+        /// <param name="newOperationId">The name of the newly created operation Id.</param>
+        /// <param name="correlationContext">The correlation context.</param>
+        /// <param name="capturedContext">The captured context to reinstate with the operation is complete.</param>
+        public ApplicationInsightsOperation(ApplicationInsightsTelemetron provider, string operationName, string newOperationId, string correlationContext, byte[] capturedContext = null)
+            : base(provider, operationName, newOperationId, correlationContext, capturedContext)
         {
             this.aiTelemetry = new ApplicationInsightsOperationTelemetry(operationName, newOperationId, correlationContext);
             this.aiTelemetry.Timestamp = DateTimeOffset.UtcNow;

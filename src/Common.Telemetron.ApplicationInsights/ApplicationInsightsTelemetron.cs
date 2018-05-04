@@ -3,15 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using Common.Extension.Core;
-    using Common.Telemetron.Configuration;
-    using Common.Telemetron.Diagnostics;
+    using Polytech.Common.Telemetron.Configuration;
+    using Polytech.Common.Telemetron.Diagnostics;
     using Microsoft.ApplicationInsights;
     using Microsoft.ApplicationInsights.DataContracts;
     using Microsoft.ApplicationInsights.Extensibility;
+    using Polytech.Common.Extension;
 
     /// <summary>
-    /// 
+    /// Telemetron for implementation of the Application Insights Telemetron.
     /// </summary>
     public class ApplicationInsightsTelemetron : CorrelatedProviderBase, ITelemetronProvider<byte[]>
     {
@@ -65,34 +65,20 @@
             try
             {
                 byte[] capturedCorrelationContext = this.CorrelationContext.Capture();
+                CorrelationContext localCorrelationcontext = new CorrelationContext(correlationContext);
 
-                try
-                {
-                    CorrelationContext localCorrelationcontext = new CorrelationContext(correlationContext);
+                long newOperationId = localCorrelationcontext.AddOperation();
+                string cc = localCorrelationcontext.ToString();
 
-                    long newOperationId = localCorrelationcontext.AddOperation();
-                    string cc = localCorrelationcontext.ToString();
+                this.CorrelationContext = localCorrelationcontext;
 
-                    this.CorrelationContext = localCorrelationcontext;
+                IOperation createdOperation = new ApplicationInsightsOperation(this, operationName, newOperationId.GetBase64String(), cc);
 
-                    IOperation createdOperation = new ApplicationInsightsOperation(this, operationName, newOperationId.GetBase64String(), cc);
-
-                    return createdOperation;
-                }
-                catch (Exception ex)
-                {
-                    DiagnosticTrace.Instance.Error("An unexpected error occurred when attempting to create an operation", ex, "7AKlKXaBwkM");
-
-                    return new NullOperation();
-                }
-                finally
-                {
-                    this.CorrelationContext = new CorrelationContext(capturedCorrelationContext);
-                }
+                return createdOperation;
             }
             catch (Exception ex)
             {
-                DiagnosticTrace.Instance.Error("An unexpected error occurred when attempting to reinstate the correlation context", ex, "t/30e9t+2kM");
+                DiagnosticTrace.Instance.Error("An unexpected error occurred when attempting to create an operation", ex, "7AKlKXaBwkM");
 
                 return new NullOperation();
             }
@@ -213,6 +199,15 @@
         public bool Trace(EventSeverity eventSeverity, string message, Exception exception, string codePoint = null, Dictionary<string, string> data = null, [CallerMemberName] string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber] int callerLineNumber = -1)
         {
             return this.TraceInternal(eventSeverity, message, codePoint, data.SafeCombine(exception), callerMemberName, callerFilePath, callerLineNumber);
+        }
+
+        /// <summary>
+        /// Repply the origin context captured as part of an operation.
+        /// </summary>
+        /// <param name="capturedContext">the context to reapply.</param>
+        void ICorrelatedProvider.ReapplyOriginContext(byte[] capturedContext)
+        {
+            this.CorrelationContext = new CorrelationContext(capturedContext);
         }
     }
 }

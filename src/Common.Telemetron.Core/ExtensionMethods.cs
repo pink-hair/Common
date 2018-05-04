@@ -180,6 +180,11 @@ namespace Polytech.Common.Telemetron
                     callerFilePath,
                     callerLineNumber);
 
+        /// <summary>
+        /// Flatten an exception into a transportable document.
+        /// </summary>
+        /// <param name="ex">The exception to flatten.</param>
+        /// <returns>A dictionary containing all of the properties.</returns>
         public static Dictionary<string, string> FlattenException(this Exception ex)
         {
             string currentPath = "/";
@@ -191,15 +196,12 @@ namespace Polytech.Common.Telemetron
             return result;
         }
 
-        public static string GetBase64String(this long num)
-        {
-            byte[] bytes = BitConverter.GetBytes(num);
-
-            string result = Convert.ToBase64String(bytes);
-
-            return result;
-        }
-
+        /// <summary>
+        /// Safely combine a dictionary and an exception. Either can be null.
+        /// </summary>
+        /// <param name="provider">The dictionary.</param>
+        /// <param name="ex">The exception</param>
+        /// <returns>The Dictionary full of properties.</returns>
         public static Dictionary<string, string> SafeCombine(this Dictionary<string, string> provider, Exception ex)
         {
             if (provider == null)
@@ -217,6 +219,16 @@ namespace Polytech.Common.Telemetron
             }
 
             return provider;
+        }
+
+        /// <summary>
+        /// Creates a new pseudorandomnumber
+        /// </summary>
+        /// <param name="r">The random provider.</param>
+        /// <returns>The next random.</returns>
+        internal static long NextInt64(this Random r)
+        {
+            return (long)(r.NextDouble() * long.MaxValue);
         }
 
         private static void FlattenInternal(Exception target, string currentPath, Dictionary<string, string> properties)
@@ -258,17 +270,6 @@ namespace Polytech.Common.Telemetron
             {
                 properties[path + "targetSite"] = targetSite;
             }
-
-        }
-
-        /// <summary>
-        /// Creates a new pseudorandomnumber
-        /// </summary>
-        /// <param name="r">The random provider.</param>
-        /// <returns>The next random.</returns>
-        internal static long NextInt64(this Random r)
-        {
-            return (long)(r.NextDouble() * long.MaxValue);
         }
     }
 }
