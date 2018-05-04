@@ -85,6 +85,10 @@
             return false;
         }
 
+        public static bool Diag(string message) => Instance.Info(message);
+
+        public static bool Diag(string message, Exception exception) => Instance.Error(message, exception);
+
         private static string CreateTraceMessage(string message, Exception exception, string codePoint, Dictionary<string, string> data)
         {
             var combinedData = data.SafeCombine(exception);
