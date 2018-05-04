@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>Polytech.Common.Telemetron</RootNamespace>
+    <PackageId>Polytech.Common.Telemetron.Multi</PackageId>
   </PropertyGroup>
   <Import Project="..\..\common-prod.props" />
 
