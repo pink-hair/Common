@@ -93,11 +93,32 @@ namespace Polytech.Common.Telemetron
             }
         }
 
+        public void AssertDataContains(string eventType, string partial, bool caseSensitive = true)
+        {
+            IEnumerable<string> datas = this.GetData(eventType).ToArray();
+
+            if (datas.Count() == 0)
+            {
+                Assert.Fail($"Found now rows with expected type <{eventType}>");
+            }
+
+            if (!caseSensitive)
+            {
+                partial = partial.ToUpperInvariant();
+                datas = datas.Select(d => d.ToUpperInvariant()).ToArray();
+            }
+
+            if (!datas.Any(d => d.Contains(partial)))
+            {
+                Assert.Fail($"Could not find string <{partial}> in events of type <{eventType}>");
+            }
+        }
+
         private bool Contains(string partial, out string firstActual)
         {
             string partialUpper = partial.ToUpperInvariant();
 
-            string payload = this.listener.Events.FirstOrDefault(e => e.Upper.Contains(partialUpper)).Actual;
+            string payload = this.listener.Events.ToArray().FirstOrDefault(e => e.Upper.Contains(partialUpper)).Actual;
 
             if (payload != null)
             {

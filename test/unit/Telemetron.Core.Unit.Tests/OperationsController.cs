@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
-namespace Telemetron.Core.Unit.Tests
+namespace Polytech.Common.Telemetron.Core.Unit
 {
     [TestClass]
     [ExcludeFromCodeCoverage]

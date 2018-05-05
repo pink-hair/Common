@@ -10,6 +10,7 @@
     <ProjectReference Include="..\..\..\src\Common.Telemetron.Console\Common.Telemetron.Console.csproj" />
     <ProjectReference Include="..\..\..\src\Common.Telemetron.Core\Common.Telemetron.Core.csproj" />
     <ProjectReference Include="..\..\..\src\Common.Telemtron.Test\Common.Telemetron.Test.csproj" />
+    <ProjectReference Include="..\Telemetron.Core.Unit.Tests\Telemetron.Core.Unit.Tests.csproj" />
   </ItemGroup>
 
 </Project>

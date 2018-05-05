@@ -1,8 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Telemetron.Core.Unit.Tests
-{
+namespace Polytech.Common.Telemetron.Core.Unit
+{ 
     [ExcludeFromCodeCoverage]
     [TestClass]
     public class BasicController

@@ -5,6 +5,7 @@
     using System.Runtime.CompilerServices;
     using System.Text;
     using System.Threading.Tasks;
+    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     public static class OperationsExtensions
     {
@@ -37,11 +38,13 @@
                 try
                 {
                     action(createdOperation);
-                    createdOperation.SetOperationResult(OperationResult.Success);
-                }
+                    createdOperation.SetOperationResult(OperationResult.Success, true);
+                    Diag($"Operation Completed without exception ## {createdOperation.OperationId} {createdOperation.Result} xOI8HWJxzkM");
+                } 
                 catch (Exception ex)
                 {
                     createdOperation.SetOperationResult(ex);
+                    Diag($"Operation Failed With Exception ## {createdOperation.OperationId} {ex.GetType().Name} vRqqr14N1UM");
                     System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ex).Throw();
                     throw ex;
                 }
@@ -78,12 +81,14 @@
                 try
                 {
                     action(createdOperation);
-                    createdOperation.SetOperationResult(OperationResult.Success);
+                    createdOperation.SetOperationResult(OperationResult.Success, true);
+                    Diag($"Operation Completed without exception ## {createdOperation.OperationId} {createdOperation.Result} yAU6I+QC3UM");
 
                 }
                 catch (Exception ex)
                 {
                     createdOperation.SetOperationResult(ex);
+                    Diag($"Operation Failed With Exception ## {createdOperation.OperationId} {ex.GetType().Name} 70x6iXcm3UM");
                     System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ex).Throw();
                     throw ex;
                 }
@@ -120,12 +125,14 @@
                 try
                 {
                     T result = function(createdOperation);
-                    createdOperation.SetOperationResult(OperationResult.Success);
+                    createdOperation.SetOperationResult(OperationResult.Success, true);
+                    Diag($"Operation Completed without exception ## {createdOperation.OperationId} {createdOperation.Result} tG25Ntq2zEM");
                     return result;
                 }
                 catch (Exception ex)
                 {
                     createdOperation.SetOperationResult(ex);
+                    Diag($"Operation Failed With Exception ## {createdOperation.OperationId} {ex.GetType().Name} ptj4OVNs3EM");
                     System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ex).Throw();
                     throw ex;
                 }
@@ -163,13 +170,15 @@
                 try
                 {
                     T result = function(createdOperation);
-                    createdOperation.SetOperationResult(OperationResult.Success);
+                    createdOperation.SetOperationResult(OperationResult.Success, true);
+                    Diag($"Operation Completed without exception ## {createdOperation.OperationId} {createdOperation.Result} P1Wtb5+q1kM");
                     return result;
 
                 }
                 catch (Exception ex)
                 {
                     createdOperation.SetOperationResult(ex);
+                    Diag($"Operation Failed With Exception ## {createdOperation.OperationId} {ex.GetType().Name} i/YkdUV70kM");
                     System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ex).Throw();
                     throw ex;
                 }
@@ -206,11 +215,13 @@
                 try
                 {
                     await action(createdOperation);
-                    createdOperation.SetOperationResult(OperationResult.Success);
+                    createdOperation.SetOperationResult(OperationResult.Success, true);
+                    Diag($"Operation Completed without exception ## {createdOperation.OperationId} {createdOperation.Result} 0kJ6Fmkh3UM");
                 }
                 catch (Exception ex)
                 {
                     createdOperation.SetOperationResult(ex);
+                    Diag($"Operation Failed With Exception ## {createdOperation.OperationId} {ex.GetType().Name} TrQpFyfaxEM");
                     System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ex).Throw();
                     throw ex;
                 }
@@ -248,11 +259,13 @@
                 try
                 {
                     await action(createdOperation);
-                    createdOperation.SetOperationResult(OperationResult.Success);
+                    createdOperation.SetOperationResult(OperationResult.Success, true);
+                    Diag($"Operation Completed without exception ## {createdOperation.OperationId} {createdOperation.Result} 19j8r2ts3kM");
                 }
                 catch (Exception ex)
                 {
                     createdOperation.SetOperationResult(ex);
+                    Diag($"Operation Failed With Exception ## {createdOperation.OperationId} {ex.GetType().Name} VqQ2PitS20M");
                     System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ex).Throw();
                     throw ex;
                 }
@@ -290,12 +303,14 @@
                 try
                 {
                     T result = await function(createdOperation);
-                    createdOperation.SetOperationResult(OperationResult.Success);
+                    createdOperation.SetOperationResult(OperationResult.Success, true);
+                    Diag($"Operation Completed without exception ## {createdOperation.OperationId} {createdOperation.Result} VqQ2PitS20M");
                     return result;
                 }
                 catch (Exception ex)
                 {
                     createdOperation.SetOperationResult(ex);
+                    Diag($"Operation Failed With Exception ## {createdOperation.OperationId} {ex.GetType().Name} Dx2+tYcO30M");
                     System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ex).Throw();
                     throw ex;
                 }
@@ -334,12 +349,14 @@
                 try
                 {
                     T result = await function(createdOperation);
-                    createdOperation.SetOperationResult(OperationResult.Success);
+                    createdOperation.SetOperationResult(OperationResult.Success, true);
+                    Diag($"Operation Completed without exception ## {createdOperation.OperationId} {createdOperation.Result} sB0y9NcO2UM");
                     return result;
                 }
                 catch (Exception ex)
                 {
                     createdOperation.SetOperationResult(ex);
+                    Diag($"Operation Failed With Exception ## {createdOperation.OperationId} {ex.GetType().Name} ZkYmFzMjs0M");
                     System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ex).Throw();
                     throw ex;
                 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Polytech.Common.Telemetron;
 
-namespace Telemetron.Core.Unit.Tests
+namespace Polytech.Common.Telemetron.Core.Unit
 {
     using System.Diagnostics.CodeAnalysis;
     using static Helpers;

@@ -149,9 +149,12 @@
         /// <param name="soft"></param>
         public void SetOperationResult(OperationResult result, bool soft = false)
         {
-            if (soft && this.result == OperationResult.NotSet)
+            if (soft)
             {
-                this.result = result;
+                if (this.result == OperationResult.NotSet)
+                {
+                    this.result = result;
+                }
             }
             else
             {
