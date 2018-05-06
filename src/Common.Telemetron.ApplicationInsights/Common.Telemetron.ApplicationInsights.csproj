@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common.Extension.Core\Common.Extension.Core.csproj" />
     <ProjectReference Include="..\Common.Telemetron.Core\Common.Telemetron.Core.csproj" />
+    <ProjectReference Include="..\Polytech.Ide\Polytech.Ide.csproj" />
   </ItemGroup>
 
 </Project>

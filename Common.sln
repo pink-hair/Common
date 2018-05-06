@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Telemetron.Core", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.WindowsService", "src\Common.WindowsService\Common.WindowsService.csproj", "{6C3F3D57-DA41-4E7A-82DA-8CA5F88DE459}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Telemetron.Test", "src\Common.Telemtron.Test\Common.Telemetron.Test.csproj", "{B5A32853-6BF8-4A3F-992F-0AAC49A99FDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Telemetron.Debug", "src\Common.Telemtron.Test\Common.Telemetron.Debug.csproj", "{B5A32853-6BF8-4A3F-992F-0AAC49A99FDE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Telemetron.Console", "src\Common.Telemetron.Console\Common.Telemetron.Console.csproj", "{ADA7C6D3-78D0-4BC8-A78D-5F8FE095EECC}"
 EndProject
@@ -33,6 +33,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Extension.Core", "src\Common.Extension.Core\Common.Extension.Core.csproj", "{73E6AEE7-D6A1-431D-9C70-05B302EB559F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polytech.Common.Telemetron.Multi", "src\Polytech.Common.Telemetron.Multi\Polytech.Common.Telemetron.Multi.csproj", "{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polytech.Common.Telemetron.ApplicationInsights.Tests", "test\unit\Polytech.Common.Telemetron.ApplicationInsights.Tests\Polytech.Common.Telemetron.ApplicationInsights.Tests.csproj", "{82723A86-A6AA-47B9-9902-F8AA899F819F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polytech.Ide", "src\Polytech.Ide\Polytech.Ide.csproj", "{74A617CF-B036-4853-8B3E-655E6CC9E5FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +84,14 @@ Global
 		{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82723A86-A6AA-47B9-9902-F8AA899F819F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82723A86-A6AA-47B9-9902-F8AA899F819F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82723A86-A6AA-47B9-9902-F8AA899F819F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82723A86-A6AA-47B9-9902-F8AA899F819F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74A617CF-B036-4853-8B3E-655E6CC9E5FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74A617CF-B036-4853-8B3E-655E6CC9E5FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74A617CF-B036-4853-8B3E-655E6CC9E5FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74A617CF-B036-4853-8B3E-655E6CC9E5FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +99,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C3C5F3B7-04FB-44E6-B06C-18946A0071EA} = {6D1661A9-F2CB-444C-AFD3-A583F47272C0}
 		{D17E4D8F-CD5C-4203-9BA5-713D69C66CEF} = {6D1661A9-F2CB-444C-AFD3-A583F47272C0}
+		{82723A86-A6AA-47B9-9902-F8AA899F819F} = {6D1661A9-F2CB-444C-AFD3-A583F47272C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0D1D78-D3C4-4FF1-9420-8D6897DA9668}

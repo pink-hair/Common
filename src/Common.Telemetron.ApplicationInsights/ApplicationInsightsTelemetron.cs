@@ -57,8 +57,7 @@
                 string cc = localCorrelationcontext.ToString();
 
                 this.CorrelationContext = localCorrelationcontext;
-
-                IOperation createdOperation = new ApplicationInsightsOperation(this, operationName, newOperationId.GetBase64String(), cc);
+                IOperation createdOperation = CreateOperationInternalWithContextSet(operationName, newOperationIdString, cc);
 
                 return createdOperation;
             }
@@ -70,10 +69,22 @@
             }
         }
 
+        protected virtual IOperation CreateOperationInternalWithContextSet(string operationName, string newOperationIdString, string cc)
+        {
+            return new ApplicationInsightsOperation(this, operationName, newOperationIdString, cc);
+        }
+
         public IOperation CreateOperation(string operationName, byte[] correlationContext)
         {
             try
             {
+                if (correlationContext == null)
+                {
+                    Diag($"WARN {nameof(correlationContext)} is null, defaulting to normal stack, events will not be correlated as expected ## jYg0r0ZEykM");
+                    return this.CreateOperation(operationName);
+                    
+                }
+
                 byte[] capturedCorrelationContext = this.CorrelationContext.Capture();
                 CorrelationContext localCorrelationcontext = new CorrelationContext(correlationContext);
 
@@ -90,7 +101,7 @@
 
                 this.CorrelationContext = localCorrelationcontext;
 
-                IOperation createdOperation = new ApplicationInsightsOperation(this, operationName, newOperationId.GetBase64String(), cc);
+                IOperation createdOperation = this.CreateOperationInternalWithContextSet(operationName, newOperationIdString, cc);
 
                 return createdOperation;
             }
@@ -106,11 +117,7 @@
         {
             try
             {
-                EventTelemetry telemetry = new EventTelemetry(name);
-                telemetry.SetOperationInfo(this);
-                telemetry.MergeProperties(data.Safe());
-
-                this.internalTelemetryClient.TrackEvent(telemetry);
+                this.EventInternal(name, data);
 
                 return true;
             }
@@ -122,15 +129,20 @@
             }
         }
 
+        protected virtual void EventInternal(string name, Dictionary<string, string> data)
+        {
+            EventTelemetry telemetry = new EventTelemetry(name);
+            telemetry.SetOperationInfo(this);
+            telemetry.MergeProperties(data.Safe());
+
+            this.internalTelemetryClient.TrackEvent(telemetry);
+        }
+
         public bool Metric(string name, double value = 1, Dictionary<string, string> data = null)
         {
             try
             {
-                MetricTelemetry telemetry = new MetricTelemetry(name, value);
-                telemetry.SetOperationInfo(this);
-                telemetry.MergeProperties(data.Safe());
-
-                this.internalTelemetryClient.TrackMetric(telemetry);
+                this.MetricInternal(name, value, data);
 
                 return true;
             }
@@ -142,6 +154,15 @@
             }
         }
 
+        private void MetricInternal(string name, double value, Dictionary<string, string> data)
+        {
+            MetricTelemetry telemetry = new MetricTelemetry(name, value);
+            telemetry.SetOperationInfo(this);
+            telemetry.MergeProperties(data.Safe());
+
+            this.internalTelemetryClient.TrackMetric(telemetry);
+        }
+
         public bool Trace(EventSeverity eventSeverity, string message, string codePoint = null, Dictionary<string, string> data = null, [CallerMemberName] string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber] int callerLineNumber = -1)
         {
             return TraceInternal(eventSeverity, message, codePoint, data, callerMemberName, callerFilePath, callerLineNumber);
@@ -151,58 +172,7 @@
         {
             try
             {
-                SeverityLevel sl;
-
-                switch (eventSeverity)
-                {
-                    case EventSeverity.Verbose:
-                    case EventSeverity.Debug:
-                        sl = SeverityLevel.Verbose;
-                        break;
-                    case EventSeverity.Metric:
-                    case EventSeverity.OperationInfo:
-                    case EventSeverity.Event:
-                    case EventSeverity.Info:
-                        sl = SeverityLevel.Information;
-                        break;
-                    case EventSeverity.Warning:
-                        sl = SeverityLevel.Warning;
-                        break;
-                    case EventSeverity.Error:
-                    case EventSeverity.OperationError:
-                        sl = SeverityLevel.Error;
-                        break;
-                    case EventSeverity.Fatal:
-                        sl = SeverityLevel.Critical;
-                        break;
-                    default:
-                        sl = SeverityLevel.Verbose;
-                        break;
-                }
-
-                Dictionary<string, string> props = data.Safe();
-
-                TraceTelemetry tt = new TraceTelemetry()
-                {
-                    Message = message,
-                    Timestamp = DateTimeOffset.UtcNow,
-                    SeverityLevel = sl
-                };
-
-                this.AddCodepoint(message, codePoint, callerMemberName, callerFilePath, callerLineNumber, props);
-                this.AddCallerFilePath(callerFilePath, props);
-                this.AddCallerLineNumber(callerLineNumber, props);
-                this.AddCallerMemberName(callerMemberName, props);
-
-                if (this.EmitAdditionalData)
-                {
-                    tt.MergeProperties(props);
-                }
-
-                // set operational properties 
-                tt.SetOperationInfo(this);
-
-                this.internalTelemetryClient.TrackTrace(tt);
+                this.TraceToAiInternal(eventSeverity, message, codePoint, data, callerMemberName, callerFilePath, callerLineNumber);
 
                 return true;
             }
@@ -212,6 +182,62 @@
 
                 return true;
             }
+        }
+
+        protected virtual void TraceToAiInternal(EventSeverity eventSeverity, string message, string codePoint, Dictionary<string, string> data, string callerMemberName, string callerFilePath, int callerLineNumber)
+        {
+            SeverityLevel sl;
+
+            switch (eventSeverity)
+            {
+                case EventSeverity.Verbose:
+                case EventSeverity.Debug:
+                    sl = SeverityLevel.Verbose;
+                    break;
+                case EventSeverity.Metric:
+                case EventSeverity.OperationInfo:
+                case EventSeverity.Event:
+                case EventSeverity.Info:
+                    sl = SeverityLevel.Information;
+                    break;
+                case EventSeverity.Warning:
+                    sl = SeverityLevel.Warning;
+                    break;
+                case EventSeverity.Error:
+                case EventSeverity.OperationError:
+                    sl = SeverityLevel.Error;
+                    break;
+                case EventSeverity.Fatal:
+                    sl = SeverityLevel.Critical;
+                    break;
+                default:
+                    sl = SeverityLevel.Verbose;
+                    break;
+            }
+
+            Dictionary<string, string> props = data.Safe();
+
+            TraceTelemetry tt = new TraceTelemetry()
+            {
+                Message = message,
+                Timestamp = DateTimeOffset.UtcNow,
+                SeverityLevel = sl
+            };
+
+            this.AddCodepoint(message, codePoint, callerMemberName, callerFilePath, callerLineNumber, props);
+            this.AddCallerFilePath(callerFilePath, props);
+            this.AddCallerLineNumber(callerLineNumber, props);
+            this.AddCallerMemberName(callerMemberName, props);
+
+            if (this.EmitAdditionalData)
+            {
+                tt.MergeProperties(props);
+            }
+
+            // set operational properties 
+            tt.SetOperationInfo(this);
+
+            this.internalTelemetryClient.TrackTrace(tt);
         }
 
         public bool Trace(EventSeverity eventSeverity, string message, Exception exception, string codePoint = null, Dictionary<string, string> data = null, [CallerMemberName] string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber] int callerLineNumber = -1)

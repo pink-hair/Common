@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <Import Project="..\..\..\common-test-sdk.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Common.Telemetron.ApplicationInsights\Common.Telemetron.ApplicationInsights.csproj" />
+    <ProjectReference Include="..\Telemetron.Core.Unit.Tests\Telemetron.Core.Unit.Tests.csproj" />
+  </ItemGroup>
+
+</Project>

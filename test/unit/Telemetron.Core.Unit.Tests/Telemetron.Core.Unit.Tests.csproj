@@ -6,7 +6,7 @@
   <Import Project="..\..\..\common-test-sdk.props" />
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Common.Telemetron.Core\Common.Telemetron.Core.csproj" />
-    <ProjectReference Include="..\..\..\src\Common.Telemtron.Test\Common.Telemetron.Test.csproj" />
+    <ProjectReference Include="..\..\..\src\Common.Telemtron.Test\Common.Telemetron.Debug.csproj" />
   </ItemGroup>
 
 </Project>

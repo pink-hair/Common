@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Polytech.Common.Telemetron
+﻿namespace Polytech.Common.Telemetron
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
     using Microsoft.ApplicationInsights;
     using Microsoft.ApplicationInsights.Extensibility;
+
+    /// <summary>
+    /// An operation for use in Application Insights.
+    /// </summary>
     public class ApplicationInsightsOperation : CorrelatedOperationBase<byte[], ApplicationInsightsTelemetron>, IOperation, IDisposable
     {
         private readonly ApplicationInsightsOperationTelemetry aiTelemetry;
@@ -19,7 +22,12 @@ namespace Polytech.Common.Telemetron
         /// <param name="newOperationId">The name of the newly created operation Id.</param>
         /// <param name="correlationContext">The correlation context.</param>
         /// <param name="capturedContext">The captured context to reinstate with the operation is complete.</param>
-        public ApplicationInsightsOperation(ApplicationInsightsTelemetron provider, string operationName, string newOperationId, string correlationContext, byte[] capturedContext = null)
+        public ApplicationInsightsOperation(
+            ApplicationInsightsTelemetron provider, 
+            string operationName, 
+            string newOperationId, 
+            string correlationContext, 
+            byte[] capturedContext = null)
             : base(provider, operationName, newOperationId, correlationContext, capturedContext)
         {
             this.aiTelemetry = new ApplicationInsightsOperationTelemetry(operationName, newOperationId, correlationContext);

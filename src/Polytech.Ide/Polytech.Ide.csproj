@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>Polytech.Ide</RootNamespace>
+    <PackageId>Polytech.Ide</PackageId>
+  </PropertyGroup>
+  <Import Project="..\..\common-prod.props" />
+
+</Project>

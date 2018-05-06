@@ -2,10 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Text;
     using Microsoft.ApplicationInsights.Channel;
     using Microsoft.ApplicationInsights.DataContracts;
     using Microsoft.ApplicationInsights.Extensibility.Implementation;
+    using Polytech.Ide;
 
     public class ApplicationInsightsOperationTelemetry : OperationTelemetry, ITelemetry, ISupportProperties, ISupportMetrics, ISupportSampling
     {
@@ -45,6 +47,7 @@
             this.metrics = new Dictionary<string, double>();
             this.telemetryContext = new TelemetryContext();
 
+            this.name = operationName;
             this.id = operationId;
             this.CorrelationContext = correlationContext;
         }
@@ -132,12 +135,16 @@
         /// <summary>
         /// Gets or sets the sequence for this event.
         /// </summary>
+        [ExcludeFromCodeCoverage]
+        [Justification(nameof(ExcludeFromCodeCoverageAttribute), "This property is used by AI Internally.")]
         public override string Sequence
         {
             get => this.sequence;
             set => this.sequence = value;
         }
 
+        [ExcludeFromCodeCoverage]
+        [Justification(nameof(ExcludeFromCodeCoverageAttribute), "This property is used by AI Internally.")]
         public double? SamplingPercentage
         {
             get => this.samplingPercentage;
@@ -156,12 +163,12 @@
 
             foreach (KeyValuePair<string, double> metric in this.metrics)
             {
-                t.metrics.Add(metric.Key, metric.Value);
+                t.metrics[metric.Key] = metric.Value;
             }
 
             foreach (KeyValuePair<string, string> property in this.Properties)
             {
-                t.Properties.Add(property.Key, property.Value);
+                t.Properties[property.Key] = property.Value;
             }
 
             return t;

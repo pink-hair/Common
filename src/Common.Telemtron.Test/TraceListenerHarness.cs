@@ -58,11 +58,20 @@ namespace Polytech.Common.Telemetron
             Assert.AreEqual(count, this.listener.Events.Count);
         }
 
+        public IEnumerable<TraceEventEvent> GetEvents(string eventType)
+        {
+            var data = this.Events
+                .ToArray() // Copy 
+                .Where(e => e.Actual.Contains(eventType));
+
+            return data;
+        }
+
         public IEnumerable<string> GetData(string eventType)
         {
-            return this.Events
-                .ToArray() // Copy 
-                .Where(e => e.Actual.Contains(eventType) && e.Data != null)
+            var data = this.GetEvents(eventType);
+
+            return data.Where(e => e.Data != null)
                 .Select(e => e.Data);
         }
 
@@ -112,6 +121,12 @@ namespace Polytech.Common.Telemetron
             {
                 Assert.Fail($"Could not find string <{partial}> in events of type <{eventType}>");
             }
+        }
+
+        public void AssertAny(string eventType)
+        {
+            var data = this.GetEvents(eventType).ToArray();
+            Assert.IsTrue(data.Any(), $"No events were found to be published in the harness with the id of '{eventType}'");
         }
 
         private bool Contains(string partial, out string firstActual)
