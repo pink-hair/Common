@@ -237,7 +237,5 @@ namespace Polytech.Common.Telemetron
                 base.Dispose(disposing);
             }
         }
-
-
     }
 }
