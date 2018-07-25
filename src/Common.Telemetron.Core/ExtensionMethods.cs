@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Polytech.Common.Telemetron
+namespace PinkHair.Common.Telemetron
 {
     public static class ExtensionMethods
     {

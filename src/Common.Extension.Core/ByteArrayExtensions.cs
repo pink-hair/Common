@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Polytech.Common.Extension
+namespace PinkHair.Common.Extension
 {
     public static class ByteArrayExtensions
     {

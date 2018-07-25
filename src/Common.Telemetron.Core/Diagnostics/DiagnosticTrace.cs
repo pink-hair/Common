@@ -1,4 +1,4 @@
-﻿namespace Polytech.Common.Telemetron.Diagnostics
+﻿namespace PinkHair.Common.Telemetron.Diagnostics
 {
     using Newtonsoft.Json;
     using System;

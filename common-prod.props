@@ -14,8 +14,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright>Copyright © Poly Tech</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseUrl>https://github.com/poly-tech/Common/blob/origin/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/poly-tech/Common</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/pink-hair/Common/blob/origin/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/pink-hair/Common</PackageProjectUrl>
     <PackageTags>Logging</PackageTags>
   </PropertyGroup>
 

@@ -1,4 +1,4 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System;
     using System.Collections.Concurrent;
@@ -7,11 +7,11 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
-    using Polytech.Common.Extension;
-    using Polytech.Common.Telemetron;
-    using Polytech.Common.Telemetron.Configuration;
-    using Polytech.Common.Telemetron.Diagnostics;
-    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+    using PinkHair.Common.Extension;
+    using PinkHair.Common.Telemetron;
+    using PinkHair.Common.Telemetron.Configuration;
+    using PinkHair.Common.Telemetron.Diagnostics;
+    using static PinkHair.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     /// <summary>
     /// A Telemetron for console output.

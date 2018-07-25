@@ -1,4 +1,4 @@
-﻿namespace Polytech.Common.Extension
+﻿namespace PinkHair.Common.Extension
 {
     /// <summary>
     /// Misc Extension Methods.

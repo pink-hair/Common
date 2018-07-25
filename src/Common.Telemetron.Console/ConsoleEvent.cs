@@ -1,9 +1,9 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using Polytech.Common.Telemetron;
+    using PinkHair.Common.Telemetron;
 
     /// <summary>
     /// Data Package to hold a console event for thread aggregation.

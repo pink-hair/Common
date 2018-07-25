@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Polytech.Common.Telemetron;
+using PinkHair.Common.Telemetron;
 
 namespace Telemetron.Core.Unit.Tests
 {

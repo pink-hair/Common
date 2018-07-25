@@ -1,10 +1,10 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+    using static PinkHair.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     /// <summary>
     /// A multi targeted operation. Useful when using two providers.

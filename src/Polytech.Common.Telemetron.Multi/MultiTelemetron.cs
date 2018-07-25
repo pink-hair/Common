@@ -1,10 +1,10 @@
-﻿using Polytech.Common.Telemetron.Configuration;
+﻿using PinkHair.Common.Telemetron.Configuration;
 using System;
 using System.Collections.Generic;
 
-namespace Polytech.Common.Telemetron
+namespace PinkHair.Common.Telemetron
 {
-    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+    using static PinkHair.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     public class MultiTelemetron<T> : CorrelatedProviderBase,
         IOperationProvider<T>

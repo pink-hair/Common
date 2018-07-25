@@ -1,12 +1,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using Polytech.Common.Telemetron;
+using PinkHair.Common.Telemetron;
 
 namespace Telemetron.Console.Unit.Tests
 {
     using System.Diagnostics.CodeAnalysis;
     using static global::Telemetron.Console.Unit.Tests.Common;
-    using static global::Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+    using static global::PinkHair.Common.Telemetron.Diagnostics.DiagnosticTrace;
     using System.Linq;
 
     [ExcludeFromCodeCoverage]

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Polytech.Common.Telemetron
+namespace PinkHair.Common.Telemetron
 {
     using Microsoft.ApplicationInsights;
     using Microsoft.ApplicationInsights.Extensibility;

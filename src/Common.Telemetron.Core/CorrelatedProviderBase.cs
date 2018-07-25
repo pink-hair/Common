@@ -1,4 +1,4 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System.Threading;
     using Common.Telemetron.Configuration;

@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
-    <RootNamespace>Polytech.Common</RootNamespace>
-    <PackageId>Polytech.Common.Extension.Core</PackageId>
+    <RootNamespace>PinkHair.Common</RootNamespace>
+    <PackageId>PinkHair.Common.Extension.Core</PackageId>
   </PropertyGroup>
   <Import Project="..\..\common-prod.props" />
 

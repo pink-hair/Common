@@ -1,12 +1,12 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Polytech.Common.Telemetron.Diagnostics;
-    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+    using PinkHair.Common.Telemetron.Diagnostics;
+    using static PinkHair.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     internal class MultiDictionary : IDictionary<string, string>
     {

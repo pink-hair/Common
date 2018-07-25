@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Polytech.Common.Telemetron.Diagnostics;
+using PinkHair.Common.Telemetron.Diagnostics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Polytech.Common.Telemetron
+namespace PinkHair.Common.Telemetron
 {
     public class TraceListenerHarness : IDisposable, IList<TraceEventEvent>
     {

@@ -1,11 +1,11 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
     using Microsoft.ApplicationInsights.Channel;
     using Microsoft.ApplicationInsights.DataContracts;
-    using Polytech.Common.Extension;
+    using PinkHair.Common.Extension;
 
     public static class ExtensionMethods
     {

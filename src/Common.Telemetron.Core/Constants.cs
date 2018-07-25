@@ -1,4 +1,4 @@
-﻿namespace Polytech.Common.Telemetron.Constants
+﻿namespace PinkHair.Common.Telemetron.Constants
 {
     public static class EventConstants
     {

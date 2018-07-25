@@ -1,9 +1,9 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using Polytech.Common.Telemetron.Configuration;
+    using PinkHair.Common.Telemetron.Configuration;
 
     /// <summary>
     /// A provider that supports the concept of operations. 

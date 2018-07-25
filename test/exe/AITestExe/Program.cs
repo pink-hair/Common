@@ -2,8 +2,8 @@
 
 namespace AITestExe
 {
-    using Polytech.Common.Telemetron;
-    using Polytech.Common.Telemetron.Configuration;
+    using PinkHair.Common.Telemetron;
+    using PinkHair.Common.Telemetron.Configuration;
 
     class Program
     {

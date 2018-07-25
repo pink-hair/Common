@@ -1,11 +1,11 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System;
     using System.Text;
     using System.Threading;
     using Common.Telemetron.Obscure.ValueTypes;
 
-    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+    using static PinkHair.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     /// <summary>
     /// A correlation context struct. Designed to be paired with <see cref="AsyncLocal{T}"/>.

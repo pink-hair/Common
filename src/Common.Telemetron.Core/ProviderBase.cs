@@ -1,11 +1,11 @@
 ﻿using System;
-namespace Polytech.Common.Telemetron
+namespace PinkHair.Common.Telemetron
 {
     using Common.Telemetron.Configuration;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+    using static PinkHair.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     public abstract class ProviderBase
     {

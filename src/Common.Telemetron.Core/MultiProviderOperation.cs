@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Polytech.Common.Telemetron
+namespace PinkHair.Common.Telemetron
 {
     public class MultiProviderOperation
     {

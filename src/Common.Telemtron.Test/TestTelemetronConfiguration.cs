@@ -1,4 +1,4 @@
-﻿namespace Polytech.Common.Telemetron.Configuration
+﻿namespace PinkHair.Common.Telemetron.Configuration
 {
     public class TestTelemetronConfiguration : TelemetronConfigurationBase, ITestTelemetronConfiguration
     {

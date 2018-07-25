@@ -1,10 +1,10 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
 	using System;
 	using System.Collections.Generic;
 	using System.Text;
-	using Polytech.Common.Telemetron;
-	using Polytech.Common.Telemetron.Configuration;
+	using PinkHair.Common.Telemetron;
+	using PinkHair.Common.Telemetron.Configuration;
 
     public class ConsoleConfiguration : TelemetronConfigurationBase, IConsoleConfiguration
     {

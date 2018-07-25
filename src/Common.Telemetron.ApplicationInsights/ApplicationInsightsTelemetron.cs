@@ -1,16 +1,16 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using Polytech.Common.Telemetron.Configuration;
-    using Polytech.Common.Telemetron.Diagnostics;
+    using PinkHair.Common.Telemetron.Configuration;
+    using PinkHair.Common.Telemetron.Diagnostics;
     using Microsoft.ApplicationInsights;
     using Microsoft.ApplicationInsights.DataContracts;
     using Microsoft.ApplicationInsights.Extensibility;
-    using Polytech.Common.Extension;
+    using PinkHair.Common.Extension;
 
-    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+    using static PinkHair.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     /// <summary>
     /// Telemetron for implementation of the Application Insights Telemetron.

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Telemetron.Console.Unit.Tests
 {
-    using Polytech.Common.Telemetron;
+    using PinkHair.Common.Telemetron;
     using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
@@ -17,7 +17,7 @@ namespace Telemetron.Console.Unit.Tests
                 EmitAdditionalData = true,
                 EmitCodePoint = true,
                 EmitCorrelationContext = true,
-                OperationConfiguration = new Polytech.Common.Telemetron.Configuration.OperationConfiguration()
+                OperationConfiguration = new PinkHair.Common.Telemetron.Configuration.OperationConfiguration()
                 {
                     EmitOperationMetrics = true
                 }

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Polytech.Common.Telemetron
+namespace PinkHair.Common.Telemetron
 {
     public interface ICorrelatedProvider
     {

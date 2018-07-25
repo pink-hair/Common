@@ -6,8 +6,8 @@ using System.Text;
 
 namespace Telemetron.Console.Unit.Tests
 {
-    using Polytech.Common.Telemetron;
-    using static global::Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+    using PinkHair.Common.Telemetron;
+    using static global::PinkHair.Common.Telemetron.Diagnostics.DiagnosticTrace;
     using static Common;
     using System.Linq;
 

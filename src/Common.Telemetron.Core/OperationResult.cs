@@ -1,4 +1,4 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     /// <summary>
     /// The result of an operation.

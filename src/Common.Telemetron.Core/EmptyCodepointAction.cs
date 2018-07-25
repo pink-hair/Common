@@ -1,4 +1,4 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     /// <summary>
     /// The enumeration for the action to take when a codepoint object is null. Used by implementing providers.

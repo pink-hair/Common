@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
-    <RootNamespace>Polytech.Common.Telemetron</RootNamespace>
-    <PackageId>Polytech.Common.Telemetron.Test</PackageId>
+    <RootNamespace>PinkHair.Common.Telemetron</RootNamespace>
+    <PackageId>PinkHair.Common.Telemetron.Test</PackageId>
   </PropertyGroup>
   <Import Project="..\..\common-prod.props" />
   <ItemGroup>

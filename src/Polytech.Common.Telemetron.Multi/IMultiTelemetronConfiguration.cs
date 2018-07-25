@@ -1,4 +1,4 @@
-﻿namespace Polytech.Common.Telemetron.Configuration
+﻿namespace PinkHair.Common.Telemetron.Configuration
 {
     /// <summary>
     /// Configuration for the <see cref="MultiTelemetron{T}"/>

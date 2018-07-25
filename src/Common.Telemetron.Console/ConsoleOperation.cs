@@ -1,6 +1,6 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
-    using Polytech.Common.Telemetron.Configuration;
+    using PinkHair.Common.Telemetron.Configuration;
 
     /// <summary>
     /// A console Operation. This <see cref="IOperation"/> is derived from console logging.

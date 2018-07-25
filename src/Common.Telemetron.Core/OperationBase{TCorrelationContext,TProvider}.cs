@@ -1,12 +1,12 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
-    using Polytech.Common.Telemetron.Configuration;
+    using PinkHair.Common.Telemetron.Configuration;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
 
-    using static Polytech.Common.Telemetron.Diagnostics.DiagnosticTrace;
+    using static PinkHair.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     public abstract class OperationBase<TCorrelationContext, TProvider> : IOperation
         where TProvider : IOperationProvider<TCorrelationContext>, ITraceProvider, IMetricProvider, ICorrelatedProvider

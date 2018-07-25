@@ -1,4 +1,4 @@
-﻿namespace Polytech.Common.Telemetron.Obscure.ValueTypes
+﻿namespace PinkHair.Common.Telemetron.Obscure.ValueTypes
 {
     using System;
     using System.Collections.Generic;

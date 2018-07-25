@@ -1,9 +1,9 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using Polytech.Common.Telemetron;
+    using PinkHair.Common.Telemetron;
 
     /// <summary>
     /// An operation class used by <see cref="TraceTelemetron"/>

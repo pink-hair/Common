@@ -1,11 +1,11 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Text;
-    using Polytech.Common.Extension;
-    using Polytech.Common.Telemetron.Configuration;
+    using PinkHair.Common.Extension;
+    using PinkHair.Common.Telemetron.Configuration;
 
     public abstract class TextWriterTelemetronBase : CorrelatedProviderBase, ITraceProvider
     {

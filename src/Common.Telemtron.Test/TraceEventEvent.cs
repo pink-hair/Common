@@ -1,4 +1,4 @@
-﻿namespace Polytech.Common.Telemetron
+﻿namespace PinkHair.Common.Telemetron
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Polytech.Common.Telemetron.Diagnostics;
+    using PinkHair.Common.Telemetron.Diagnostics;
 
     /// <summary>
     /// A tracing event.
