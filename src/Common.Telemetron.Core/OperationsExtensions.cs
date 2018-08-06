@@ -15,7 +15,7 @@
         /// <param name="provider">The Operation Provider that will create operations.</param>
         /// <param name="operationName">The name of the operation that will be created.</param>
         /// <param name="action">The delegate Action</param>
-        public static void Run<TCorrelationContext>(this IOperationProvider<TCorrelationContext> provider, string operationName, RunOperationDelegate action)
+        public static void Run(this IOperationProvider provider, string operationName, RunOperationDelegate action)
         {
             if (provider == null)
             {
@@ -98,7 +98,7 @@
         /// <param name="provider">The Operation Provider that will create operations.</param>
         /// <param name="operationName">The name of the operation that will be created.</param>
         /// <param name="function">The delegate Action</param>
-        public static T Run<T, TCorrelationContext>(this IOperationProvider<TCorrelationContext> provider, string operationName, RunOperationDelegate<T> function)
+        public static T Run<T>(this IOperationProvider provider, string operationName, RunOperationDelegate<T> function)
         {
             if (provider == null)
             {
@@ -184,7 +184,7 @@
         /// <param name="operationName">The name of the operation that will be created.</param>
         /// <param name="action">The delegate Action</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task RunAsync<TCorrelationContext>(this IOperationProvider<TCorrelationContext> provider, string operationName, RunOperationAsyncDelegate action)
+        public static async Task RunAsync(this IOperationProvider provider, string operationName, RunOperationAsyncDelegate action)
         {
             if (provider == null)
             {
@@ -268,7 +268,7 @@
         /// <param name="operationName">The name of the operation that will be created.</param>
         /// <param name="function">The delegate Action</param>
         /// <returns>The result of the async operation, awaited.</returns>
-        public static async Task<T> RunAsync<T, TCorrelationContext>(this IOperationProvider<TCorrelationContext> provider, string operationName, RunOperationAsyncDelegate<T> function)
+        public static async Task<T> RunAsync<T>(this IOperationProvider provider, string operationName, RunOperationAsyncDelegate<T> function)
         {
             if (provider == null)
             {
@@ -353,8 +353,8 @@
         /// <param name="provider">The Operation Provider that will create operations.</param>
         /// <param name="action">The delegate Action</param>
         /// <param name="callerMemberName">The name of the calling method that will be used as the name of the operation..</param>
-        public static void Run<TCorrelationContext>(
-            this IOperationProvider<TCorrelationContext> provider, 
+        public static void Run(
+            this IOperationProvider provider, 
             Action action, 
             [CallerMemberName]string callerMemberName = "") =>
                 Run(provider, callerMemberName, (operation) => action());
@@ -378,8 +378,8 @@
         /// <param name="provider">The Operation Provider that will create operations.</param>
         /// <param name="function">The delegate Action</param>
         /// <param name="callerMemberName">The name of the calling method that will be used as the name of the operation..</param>
-        public static T Run<T, TCorrelationContext>(
-            this IOperationProvider<TCorrelationContext> provider, 
+        public static T Run<T>(
+            this IOperationProvider provider, 
             Func<T> function, 
             [CallerMemberName]string callerMemberName = "") =>
                 Run(provider, callerMemberName, (operation) => function());
@@ -404,8 +404,8 @@
         /// <param name="action">The delegate Action</param>
         /// <param name="callerMemberName">The name of the calling method that will be used as the name of the operation..</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task RunAsync<TCorrelationContext>(
-            this IOperationProvider<TCorrelationContext> provider, 
+        public static async Task RunAsync(
+            this IOperationProvider provider, 
             Func<Task> action, 
             [CallerMemberName]string callerMemberName = "") =>
                 await RunAsync(provider, callerMemberName, (operation) => action());
@@ -436,7 +436,7 @@
         /// <param name="function">The delegate Action</param>
         /// <param name="callerMemberName">The name of the calling method that will be used as the name of the operation..</param>
         /// <returns>The result of the async operation, awaited.</returns>
-        public static async Task<T> RunAsync<T, TCorrelationContext>(this IOperationProvider<TCorrelationContext> provider, Func<Task<T>> function, [CallerMemberName]string callerMemberName = "") =>
+        public static async Task<T> RunAsync<T>(this IOperationProvider provider, Func<Task<T>> function, [CallerMemberName]string callerMemberName = "") =>
                 await RunAsync(provider, callerMemberName, (operation) => function());
 
 
