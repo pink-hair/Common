@@ -1,22 +1,28 @@
 ﻿namespace PinkHair.Common.Telemetron
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
     using PinkHair.Common.Telemetron.Configuration;
 
     /// <summary>
-    /// A provider that supports the concept of operations. 
+    /// Interface for Telemetrons that provide Operations.
     /// </summary>
-    /// <typeparam name="T">The type used to restore context manually.</typeparam>
-    public interface IOperationProvider<T>
+    public interface IOperationProvider
     {
+        /// <summary>
+        /// Gets the runtime Id of this provider. Used to correlate multi-provider operations.
+        /// </summary>
         Guid RuntimeId { get; }
 
-        IOperation CreateOperation(string operationName);
-
-        IOperation CreateOperation(string operationName, T correlationContext);
-
+        /// <summary>
+        /// Gets the current operation configuration from the underlying provider.
+        /// </summary>
         IOperationConfiguration OperationConfiguration { get; }
+
+        /// <summary>
+        /// Starts a new operation using the underlying provider.
+        /// </summary>
+        /// <param name="operationName">The name of the provider to instantiate.</param>
+        /// <returns>A handle to the operation.</returns>
+        IOperation CreateOperation(string operationName);
     }
 }

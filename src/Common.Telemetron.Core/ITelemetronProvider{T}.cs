@@ -8,7 +8,7 @@
     /// A Telemetron Provider. 
     /// </summary>
     /// <typeparam name="T">The Correlation Context type that will be used when restoring Operation Correlation.</typeparam>
-    public interface ITelemetronProvider : ITraceProvider, IOperationProvider, IMetricProvider, IEventProvider, ICorrelatedProvider
+    public interface ITelemetronProvider<T> : ITelemetronProvider, IOperationProvider<T>
     {
         // summary Interface 
     }
