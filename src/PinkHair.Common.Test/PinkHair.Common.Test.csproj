@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <RootNamespace>PinkHair.Common.Telemetron</RootNamespace>
-    <PackageId>PinkHair.Common.Telemetron.ApplicationInsights</PackageId>
+    <RootNamespace>PinkHair.Common</RootNamespace>
+    <PackageId>PinkHair.Common.Test</PackageId>
   </PropertyGroup>
   <Import Project="..\..\common-prod.props" />
   <ItemGroup>
-    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.5.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Common.Extension.Core\Common.Extension.Core.csproj" />
-    <ProjectReference Include="..\Common.Telemetron.Core\Common.Telemetron.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,12 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Text;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using PinkHair.Common.Telemetron;
+    using PinkHair.Common.Extension;
     using PinkHair.Common.Telemetron.Configuration;
     using PinkHair.Common.Telemetron.Diagnostics;
-    using PinkHair.Common.Extension;
     using static PinkHair.Common.Telemetron.Diagnostics.DiagnosticTrace;
 
     /// <summary>

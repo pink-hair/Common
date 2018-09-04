@@ -34,6 +34,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Extension.Core", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinkHair.Common.Telemetron.Multi", "src\PinkHair.Common.Telemetron.Multi\PinkHair.Common.Telemetron.Multi.csproj", "{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinkHair.Common.Test", "src\PinkHair.Common.Test\PinkHair.Common.Test.csproj", "{4261CF12-8F25-4CBC-82E5-C291CC2CC5C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinkHair.Common.Test.Tests", "test\unit\PinkHair.Common.Test.Tests\PinkHair.Common.Test.Tests.csproj", "{C2354CF3-CAF6-4D2C-91FD-E471B1AEF6E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +84,14 @@ Global
 		{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDE26F12-59D0-4A7E-BD66-B6A6055E285F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4261CF12-8F25-4CBC-82E5-C291CC2CC5C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4261CF12-8F25-4CBC-82E5-C291CC2CC5C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4261CF12-8F25-4CBC-82E5-C291CC2CC5C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4261CF12-8F25-4CBC-82E5-C291CC2CC5C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2354CF3-CAF6-4D2C-91FD-E471B1AEF6E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2354CF3-CAF6-4D2C-91FD-E471B1AEF6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2354CF3-CAF6-4D2C-91FD-E471B1AEF6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2354CF3-CAF6-4D2C-91FD-E471B1AEF6E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +99,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C3C5F3B7-04FB-44E6-B06C-18946A0071EA} = {6D1661A9-F2CB-444C-AFD3-A583F47272C0}
 		{D17E4D8F-CD5C-4203-9BA5-713D69C66CEF} = {6D1661A9-F2CB-444C-AFD3-A583F47272C0}
+		{C2354CF3-CAF6-4D2C-91FD-E471B1AEF6E5} = {6D1661A9-F2CB-444C-AFD3-A583F47272C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0D1D78-D3C4-4FF1-9420-8D6897DA9668}

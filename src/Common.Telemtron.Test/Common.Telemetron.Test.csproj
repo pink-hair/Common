@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <RootNamespace>PinkHair.Common.Telemetron</RootNamespace>
     <PackageId>PinkHair.Common.Telemetron.Test</PackageId>
   </PropertyGroup>
@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common.Extension.Core\Common.Extension.Core.csproj" />
     <ProjectReference Include="..\Common.Telemetron.Core\Common.Telemetron.Core.csproj" />
+    <ProjectReference Include="..\PinkHair.Common.Test\PinkHair.Common.Test.csproj" />
   </ItemGroup>
 
 </Project>
